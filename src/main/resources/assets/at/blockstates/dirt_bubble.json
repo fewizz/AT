@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"normal": { "model": "at:dirt_bubble" },
+		"normal": { "model": "at:dirt_bubble", "y": 90 },
+		"normal": { "model": "at:dirt_bubble", "y": 180 },
+		"normal": { "model": "at:dirt_bubble", "y": 270 }
+    }
+}

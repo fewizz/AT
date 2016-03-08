@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"normal": { "model": "at:grass_bubble" },
+		"normal": { "model": "at:grass_bubble", "y": 90 },
+		"normal": { "model": "at:grass_bubble", "y": 180 },
+		"normal": { "model": "at:grass_bubble", "y": 270 }
+    }
+}

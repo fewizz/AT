@@ -1,0 +1,6 @@
+{
+    "parent": "block/tallgrass",
+    "textures": {
+        "cross": "at:blocks/tall_grass_bubble"
+    }
+}

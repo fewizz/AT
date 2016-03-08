@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"type=0": { "model": "at:leaves_candy_0" },
+		"type=1": { "model": "at:leaves_candy_1" },
+		"type=2": { "model": "at:leaves_candy_2" },
+		"type=3": { "model": "at:leaves_candy_3" }
+    }
+}
