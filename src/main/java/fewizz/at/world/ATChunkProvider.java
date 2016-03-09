@@ -125,7 +125,7 @@ public class ATChunkProvider implements IChunkProvider {
 					}
 				}
 
-				curBiome.generateBiomeTerrain(worldObj, rand, chunkprimer, (z << 4) + chZ, (x << 4) + chX, 0);
+				curBiome.genTerrainBlocks(worldObj, rand, chunkprimer, (z << 4) + chZ, (x << 4) + chX, 0);
 			}
 		}
 

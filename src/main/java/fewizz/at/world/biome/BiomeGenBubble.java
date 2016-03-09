@@ -28,13 +28,9 @@ public class BiomeGenBubble extends ATBiome {
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
 		super.decorate(worldIn, rand, pos);
-		for (int chance = 0; chance < 16; chance++) {
-			if (rand.nextInt(2) == 0) {
-				int newX = pos.getX() + rand.nextInt(16);
-				int newZ = pos.getZ() + rand.nextInt(16);
-				new WorldGenBigCandyTree(rand.nextInt(4)).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
-			}
-		}
+		int newX = pos.getX() + rand.nextInt(16);
+		int newZ = pos.getZ() + rand.nextInt(16);
+		new WorldGenBigCandyTree(rand.nextInt(4)).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
 	}
 
 	@Override
@@ -59,17 +55,17 @@ public class BiomeGenBubble extends ATBiome {
 
 	@Override
 	public float getMountainAmplitude() {
-		return 15.0F;
+		return 25.0F;
 	}
 
 	@Override
 	public float getMountainFrequency() {
-		return 0.01F;
+		return 0.007F;
 	}
 
 	@Override
 	public float getMountainOffset() {
-		return -0.3F;
+		return -0.4F;
 	}
 
 }
