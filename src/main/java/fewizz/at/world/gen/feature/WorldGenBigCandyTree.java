@@ -27,7 +27,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	double heightAttenuation = 0.618D;
 	double branchSlope = 0.381D;
 	double scaleWidth = 1.0D;
-	double leafDensity = 1.2D;
+	double leafDensity = 1.0D;
 	int trunkSize = 1;
 	int heightLimitLimit = 20;
 	/** Sets the distance limit for how far away the generator will populate leaves from the base leaf node. */
@@ -289,7 +289,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 		BlockPos down = this.basePos.down();
 		net.minecraft.block.state.IBlockState state = this.world.getBlockState(down);
 
-		if (Block.getIdFromBlock(state.getBlock()) == Block.getIdFromBlock(ATBlocks.bubbleTallGrass) || Block.getIdFromBlock(state.getBlock()) == Block.getIdFromBlock(ATBlocks.bubbleGrass)) {
+		if (state.getBlock() == ATBlocks.bubbleTallGrass || state.getBlock() == ATBlocks.bubbleGrass) {
 			return true;
 		}
 

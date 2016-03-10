@@ -55,17 +55,17 @@ public class BiomeGenBubble extends ATBiome {
 
 	@Override
 	public float getMountainAmplitude() {
-		return 25.0F;
+		return 15.0F;
 	}
 
 	@Override
 	public float getMountainFrequency() {
-		return 0.007F;
+		return 0.003F;
 	}
 
 	@Override
 	public float getMountainOffset() {
-		return -0.4F;
+		return -0.3F;
 	}
 
 }

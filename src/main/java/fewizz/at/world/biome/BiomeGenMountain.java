@@ -2,6 +2,8 @@ package fewizz.at.world.biome;
 
 import java.util.Random;
 
+import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,6 +12,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenTaiga2;
 
 public class BiomeGenMountain extends ATBiome {
 	IBlockState snow;
@@ -17,9 +21,28 @@ public class BiomeGenMountain extends ATBiome {
 	public BiomeGenMountain() {
 		super(35);
 
+		this.biomeName = "Mountain";
 		this.topBlock = Blocks.sand.getDefaultState();
 		this.fillerBlock = Blocks.sandstone.getDefaultState();
 		this.snow = Blocks.snow.getDefaultState();
+		this.temperature = -10F;
+	}
+	
+	@Override
+	public void decorate(World worldIn, Random rand, BlockPos pos) {
+		super.decorate(worldIn, rand, pos);
+		int newX = pos.getX() + rand.nextInt(16);
+		int newZ = pos.getZ() + rand.nextInt(16);
+		BlockPos dirtPos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)).down();
+		worldIn.setBlockState(dirtPos, Blocks.dirt.getDefaultState());
+		if(worldIn.getBlockState(dirtPos).getBlock() == Blocks.sand || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))){
+			worldIn.setBlockToAir(dirtPos);
+		}
+	}
+	
+	@Override
+	public WorldGenAbstractTree genBigTreeChance(Random rand) {
+		return new WorldGenTaiga2(false);
 	}
 
 	@Override

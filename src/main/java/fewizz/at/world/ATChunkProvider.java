@@ -82,6 +82,7 @@ public class ATChunkProvider implements IChunkProvider {
 						float atMountOffset = ((ATBiome) biome).getMountainOffset();
 
 						noiseMountValue = (float) ((noiseMount.noise(((x << 4) + chX - offset) * atMountFrequency, ((z << 4) + chZ - offset) * atMountFrequency) + atMountOffset) * atMountAmplitude);
+						noiseMountValue += (float) (noiseMount.noise(((x << 4) + chX - offset) * atMountFrequency * 8, ((z << 4) + chZ - offset) * atMountFrequency * 8) * atMountAmplitude / 4);
 					}
 				}
 				/*********************************/
@@ -144,9 +145,14 @@ public class ATChunkProvider implements IChunkProvider {
 		int z = chZ * 16;
 		BlockPos blockpos = new BlockPos(x, 0, z);
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		if(biomegenbase.theBiomeDecorator.currentWorld != null) {
+			Chunk chunk = worldObj.getChunkFromChunkCoords(chX, chZ);
+			chunk.setTerrainPopulated(false);
+			return;
+		}
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(x, 0, z));
 	}
-
+	
 	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int x, int z) {
 		return true;
 	}
