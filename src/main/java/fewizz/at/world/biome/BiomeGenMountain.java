@@ -21,9 +21,9 @@ public class BiomeGenMountain extends ATBiome {
 	public BiomeGenMountain() {
 		super(35);
 
-		this.biomeName = "Mountain";
-		this.topBlock = Blocks.sand.getDefaultState();
-		this.fillerBlock = Blocks.sandstone.getDefaultState();
+		this.biomeName = "ATMountain";
+		this.topBlock = Blocks.stone.getStateFromMeta(3); // Diorite
+		this.fillerBlock = Blocks.stone.getStateFromMeta(3);
 		this.snow = Blocks.snow.getDefaultState();
 		this.temperature = -10F;
 	}
@@ -35,7 +35,7 @@ public class BiomeGenMountain extends ATBiome {
 		int newZ = pos.getZ() + rand.nextInt(16);
 		BlockPos dirtPos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)).down();
 		worldIn.setBlockState(dirtPos, Blocks.dirt.getDefaultState());
-		if(worldIn.getBlockState(dirtPos).getBlock() == Blocks.sand || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))){
+		if(worldIn.getBlockState(dirtPos).getBlock() != Blocks.snow || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))){
 			worldIn.setBlockToAir(dirtPos);
 		}
 	}

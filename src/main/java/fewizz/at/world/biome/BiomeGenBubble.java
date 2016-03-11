@@ -18,8 +18,8 @@ public class BiomeGenBubble extends ATBiome {
 	public BiomeGenBubble() {
 		super(34);
 		this.maxHeight = 0.3F;
-		this.minHeight = 0.3f;
-		this.biomeName = "Bubble";
+		this.minHeight = 0.4f;
+		this.biomeName = "ATBubble";
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 256;
@@ -45,7 +45,7 @@ public class BiomeGenBubble extends ATBiome {
 
 	@Override
 	public float getFrequency() {
-		return 0.01F;
+		return 0.015F;
 	}
 
 	@Override
@@ -55,17 +55,17 @@ public class BiomeGenBubble extends ATBiome {
 
 	@Override
 	public float getMountainAmplitude() {
-		return 15.0F;
+		return 20.0F;
 	}
 
 	@Override
 	public float getMountainFrequency() {
-		return 0.003F;
+		return 0.001F;
 	}
 
 	@Override
 	public float getMountainOffset() {
-		return -0.3F;
+		return -0.2F;
 	}
 
 }

@@ -1,4 +1,4 @@
-package fewizz.at.world;
+package fewizz.at.world.gen.layer;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;

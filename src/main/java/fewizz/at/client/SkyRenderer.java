@@ -41,6 +41,7 @@ public class SkyRenderer extends IRenderHandler {
 		mc.renderEngine.bindTexture(skybox);
 		
 		GlStateManager.pushMatrix();
+		GlStateManager.translate(0, -40, 0);
 		GlStateManager.rotate(mc.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1, 0, 0);
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 		

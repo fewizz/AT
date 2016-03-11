@@ -52,15 +52,15 @@ public class ATWorldProvider extends WorldProvider {
 		
 	}
 	
-//	@Override
-//	public IRenderHandler getCloudRenderer() {
-//		if(cr == null){
-//			cr = new CloudRenderer();
-//		}
-//		
-//		return cr;
-//	}
-//	
+	@Override
+	public IRenderHandler getCloudRenderer() {
+		if(cr == null){
+			cr = new CloudRenderer();
+		}
+		
+		return cr;
+	}
+	
 //	@Override
 //	public IRenderHandler getWeatherRenderer() {
 //		if(wr == null){
