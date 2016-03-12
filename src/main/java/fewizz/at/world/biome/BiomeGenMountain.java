@@ -87,7 +87,7 @@ public class BiomeGenMountain extends ATBiome {
 						if (height >= seaLevel - 1) {
 							chunkPrimerIn.setBlockState(x, height, z, top);
 						}
-						else if (height < seaLevel - 7 - k) {
+						else if (height < seaLevel - 12 - k) {
 							top = null;
 							filler = Blocks.stone.getDefaultState();
 							chunkPrimerIn.setBlockState(x, height, z, Blocks.gravel.getDefaultState());

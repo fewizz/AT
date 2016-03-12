@@ -28,15 +28,16 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	double branchSlope = 0.381D;
 	double scaleWidth = 1.0D;
 	double leafDensity = 1.0D;
-	int trunkSize = 1;
 	int heightLimitLimit = 20;
 	/** Sets the distance limit for how far away the generator will populate leaves from the base leaf node. */
 	int leafDistanceLimit = 6;
 	List<WorldGenBigCandyTree.FoliageCoordinates> foliageCoords;
+	IBlockState state;
 
 	public WorldGenBigCandyTree(int leafType) {
 		super(false);
 		this.leafType = leafType;
+		state = ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType);
 	}
 
 	/**
@@ -137,21 +138,21 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	 */
 	void generateLeafNode(BlockPos pos) {
 		for (int i = 0; i < this.leafDistanceLimit; ++i) {
-			this.genLeaves(pos.up(i), this.leafSize(i), ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType));
+			this.genLeaves(pos.up(i), this.leafSize(i), state);
 		}
 	}
 
-	void func_175937_a(BlockPos p_175937_1_, BlockPos p_175937_2_, Block p_175937_3_) {
-		BlockPos blockpos = p_175937_2_.add(-p_175937_1_.getX(), -p_175937_1_.getY(), -p_175937_1_.getZ());
-		int i = this.getGreatestDistance(blockpos);
-		float f = (float) blockpos.getX() / (float) i;
-		float f1 = (float) blockpos.getY() / (float) i;
-		float f2 = (float) blockpos.getZ() / (float) i;
+	void genTrunk(BlockPos posTop, BlockPos posBot, Block block) {
+		BlockPos blockpos = posBot.add(-posTop.getX(), -posTop.getY(), -posTop.getZ());
+		int dist = this.getGreatestDistance(blockpos);
+		float x = (float) blockpos.getX() / (float) dist;
+		float y = (float) blockpos.getY() / (float) dist;
+		float z = (float) blockpos.getZ() / (float) dist;
 
-		for (int j = 0; j <= i; ++j) {
-			BlockPos blockpos1 = p_175937_1_.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
-			BlockLog.EnumAxis blocklog$enumaxis = this.func_175938_b(p_175937_1_, blockpos1);
-			this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState().withProperty(BlockLog.LOG_AXIS, blocklog$enumaxis));
+		for (int i = 0; i <= dist; ++i) {
+			BlockPos blockpos1 = posTop.add((double) (0.5F + (float) i * x), (double) (0.5F + (float) i * y), (double) (0.5F + (float) i * z));
+			BlockLog.EnumAxis blocklog$enumaxis = this.func_175938_b(posTop, blockpos1);
+			this.setBlockAndNotifyAdequately(this.world, blockpos1, block.getDefaultState().withProperty(BlockLog.LOG_AXIS, blocklog$enumaxis));
 		}
 	}
 
@@ -206,13 +207,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 		BlockPos blockpos = this.basePos;
 		BlockPos blockpos1 = this.basePos.up(this.height);
 		Block block = Blocks.log;
-		this.func_175937_a(blockpos, blockpos1, block);
-
-		if (this.trunkSize == 2) {
-			this.func_175937_a(blockpos.east(), blockpos1.east(), block);
-			this.func_175937_a(blockpos.east().south(), blockpos1.east().south(), block);
-			this.func_175937_a(blockpos.south(), blockpos1.south(), block);
-		}
+		this.genTrunk(blockpos, blockpos1, block);
 	}
 
 	/**
@@ -224,7 +219,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
 
 			if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
-				this.func_175937_a(blockpos, worldgenbigtree$foliagecoordinates, Blocks.log);
+				this.genTrunk(blockpos, worldgenbigtree$foliagecoordinates, Blocks.log);
 			}
 		}
 	}
@@ -269,7 +264,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 		}
 
 		if (!this.validTreeLocation()) {
-			this.world = null; // Fix vanilla Mem leak, holds latest world
+			this.world = null;
 			return false;
 		}
 		else {
@@ -277,7 +272,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			this.generateLeaves();
 			this.generateTrunk();
 			this.generateLeafNodeBases();
-			this.world = null; // Fix vanilla Mem leak, holds latest world
+			this.world = null;
 			return true;
 		}
 	}

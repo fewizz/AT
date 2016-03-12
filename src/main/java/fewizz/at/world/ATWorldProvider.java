@@ -61,6 +61,11 @@ public class ATWorldProvider extends WorldProvider {
 		return cr;
 	}
 	
+	@Override
+	public float getCloudHeight() {
+		return 115;
+	}
+	
 //	@Override
 //	public IRenderHandler getWeatherRenderer() {
 //		if(wr == null){
