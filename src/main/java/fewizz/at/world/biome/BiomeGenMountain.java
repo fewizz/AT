@@ -27,7 +27,7 @@ public class BiomeGenMountain extends ATBiome {
 		this.snow = Blocks.snow.getDefaultState();
 		this.temperature = -10F;
 	}
-	
+
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
 		super.decorate(worldIn, rand, pos);
@@ -35,11 +35,11 @@ public class BiomeGenMountain extends ATBiome {
 		int newZ = pos.getZ() + rand.nextInt(16);
 		BlockPos dirtPos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)).down();
 		worldIn.setBlockState(dirtPos, Blocks.dirt.getDefaultState());
-		if(worldIn.getBlockState(dirtPos).getBlock() != Blocks.snow || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))){
+		if (worldIn.getBlockState(dirtPos).getBlock() != Blocks.snow || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))) {
 			worldIn.setBlockToAir(dirtPos);
 		}
 	}
-	
+
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random rand) {
 		return new WorldGenTaiga2(false);

@@ -38,43 +38,43 @@ public class ATWorldProvider extends WorldProvider {
 	@Override
 	protected void generateLightBrightnessTable() {
 		for (int i = 0; i < 16; i++) {
-			this.lightBrightnessTable[i] = 1;
+			this.lightBrightnessTable[i] = ((float)i / 16f) + 0.2f;
 		}
 	}
-	
+
 	@Override
 	public IRenderHandler getSkyRenderer() {
-		if(sr == null){
+		if (sr == null) {
 			sr = new SkyRenderer();
 		}
-		
+
 		return sr;
-		
+
 	}
-	
+
 	@Override
 	public IRenderHandler getCloudRenderer() {
-		if(cr == null){
+		if (cr == null) {
 			cr = new CloudRenderer();
 		}
-		
+
 		return cr;
 	}
-	
+
 	@Override
 	public float getCloudHeight() {
 		return 115;
 	}
-	
-//	@Override
-//	public IRenderHandler getWeatherRenderer() {
-//		if(wr == null){
-//			wr = new WeatherRenderer();
-//		}
-//		
-//		return wr;
-//	}
-	
+
+	// @Override
+	// public IRenderHandler getWeatherRenderer() {
+	// if(wr == null){
+	// wr = new WeatherRenderer();
+	// }
+	//
+	// return wr;
+	// }
+
 	@Override
 	public boolean isSurfaceWorld() {
 		return true;

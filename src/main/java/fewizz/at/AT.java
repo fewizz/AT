@@ -11,6 +11,7 @@ import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,10 +19,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 @Mod(modid = AT.MODID, version = AT.VERSION)
 public class AT {
 	public static final String MODID = "at";
-	public static final String VERSION = "0.0.4";
+	public static final String VERSION = "0.0.5";
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new ATEventHandler());
 		DimensionManager.registerProviderType(3, ATWorldProvider.class, true);
 		DimensionManager.registerDimension(3, 3);
 		ATBlocks.init();

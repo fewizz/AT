@@ -17,7 +17,6 @@ public class CloudRenderer extends IRenderHandler {
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		cloudTickCounter++;
 		GlStateManager.disableCull();
 		GlStateManager.setFogEnd(((mc.gameSettings.renderDistanceChunks * 16) - 70) * 3);
 		Tessellator tessellator = Tessellator.getInstance();

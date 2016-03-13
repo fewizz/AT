@@ -71,12 +71,14 @@ public class ATChunkProvider implements IChunkProvider {
 				BiomeGenBase biome = biomes[index];
 				float tempFrequency = frequency;
 				float noiseMountValue = 0;
+				boolean hasMountains = false;
 
 				/** For AT Biomes ****************/
 				if (biome instanceof ATBiome) {
 					frequency = ((ATBiome) biome).getFrequency();
 
 					if (((ATBiome) biome).hasMountains()) {
+						hasMountains = true;
 						float atMountFrequency = ((ATBiome) biome).getMountainFrequency();
 						float atMountAmplitude = ((ATBiome) biome).getMountainAmplitude();
 						float atMountOffset = ((ATBiome) biome).getMountainOffset();
@@ -91,7 +93,9 @@ public class ATChunkProvider implements IChunkProvider {
 
 				if (noiseMountValue > noiseValue) {
 					noiseValue = noiseMountValue;
-					biomes[index] = ATBiomes.stoneMount;
+					if (hasMountains) {
+						biomes[index] = ATBiomes.stoneMount;
+					}
 				}
 
 				heights[index] = (int) (waterLevel + (biome.minHeight * heightRatio * strength) + (noiseValue * (biome.maxHeight * strength)));
@@ -121,7 +125,7 @@ public class ATChunkProvider implements IChunkProvider {
 					if (chY < height) {
 						chunkprimer.setBlockState(chX, chY, chZ, Blocks.stone.getDefaultState());
 					}
-					else if (chY < waterLevel) {
+					else if (chY <= waterLevel) {
 						chunkprimer.setBlockState(chX, chY, chZ, Blocks.water.getDefaultState());
 					}
 				}
@@ -145,14 +149,14 @@ public class ATChunkProvider implements IChunkProvider {
 		int z = chZ * 16;
 		BlockPos blockpos = new BlockPos(x, 0, z);
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
-		if(biomegenbase.theBiomeDecorator.currentWorld != null) {
+		if (biomegenbase.theBiomeDecorator.currentWorld != null) {
 			Chunk chunk = worldObj.getChunkFromChunkCoords(chX, chZ);
 			chunk.setTerrainPopulated(false);
 			return;
 		}
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(x, 0, z));
 	}
-	
+
 	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int x, int z) {
 		return true;
 	}

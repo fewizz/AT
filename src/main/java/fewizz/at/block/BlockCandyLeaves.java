@@ -2,7 +2,7 @@ package fewizz.at.block;
 
 import java.util.List;
 
-import fewizz.at.item.block.ItemBlockCandyLeaves;
+import fewizz.at.item.block.ItemBlockWithMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
@@ -34,7 +34,7 @@ public class BlockCandyLeaves extends BlockLeavesBase {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 1));
 		this.setUnlocalizedName("leaves_candy");
 		this.fancyGraphics = true;
-		GameRegistry.registerBlock(this, ItemBlockCandyLeaves.class, "leaves_candy");
+		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, "leaves_candy");
 	}
 
 	@SideOnly(Side.CLIENT)

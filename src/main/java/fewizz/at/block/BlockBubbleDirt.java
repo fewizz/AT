@@ -15,6 +15,7 @@ public class BlockBubbleDirt extends Block{
 		super(Material.cloth);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setStepSound(soundTypeGrass);
+		this.setUnlocalizedName("dirt_bubble");
 		GameRegistry.registerBlock(this, "dirt_bubble");
 	}
 	

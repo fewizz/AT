@@ -3,7 +3,7 @@ package fewizz.at.block;
 import java.util.List;
 import java.util.Random;
 
-import fewizz.at.item.block.ItemBlockCandyLeaves;
+import fewizz.at.item.block.ItemBlockWithMeta;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -25,7 +25,7 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 		this.setStepSound(soundTypeGrass);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setUnlocalizedName("tall_grass_bubble");
-		GameRegistry.registerBlock(this, ItemBlockCandyLeaves.class, "tall_grass_bubble");
+		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, "tall_grass_bubble");
 	}
 
 	@Override

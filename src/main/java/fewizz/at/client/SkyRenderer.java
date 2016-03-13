@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
 
@@ -18,66 +19,105 @@ import static fewizz.at.client.Rend.*;
 
 public class SkyRenderer extends IRenderHandler {
 
-	ResourceLocation skybox = new ResourceLocation("at:textures/sky/skybox2.png");
-	
+	ResourceLocation skybox = new ResourceLocation("at:textures/sky/skybox.png");
+
 	float x = 1F / 4F;
 	float y = 1F / 3F;
 	float distance = 0;
+	float distanceF = 0;
 	FloatBuffer fb = GLAllocation.createDirectFloatBuffer(16);
-	
+
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		distance = (mc.gameSettings.renderDistanceChunks * 16) + 20;
+		distance = (mc.gameSettings.renderDistanceChunks * 16) + 30;
+		distanceF = distance - 40;
 		Tessellator tes = Tessellator.getInstance();
 		WorldRenderer wr = tes.getWorldRenderer();
-		GlStateManager.color(1, 1, 1);
-		GlStateManager.disableCull();
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
-		GL11.glFog(GL11.GL_FOG_COLOR, fb.put(RED, fb.get(RED) / 2F).put(GREEN, fb.get(GREEN) * 2F).put(Rend.BLUE, fb.get(BLUE) * 3F));
-		GlStateManager.setFogEnd(distance * 3);
+		int r = (int) (fb.get(Rend.RED) * 255);
+		int g = (int) (fb.get(Rend.GREEN) * 255);
+		int b = (int) (fb.get(Rend.BLUE) * 255);
+		
+		GlStateManager.setFogEnd(distance * 4);
+		
+		GlStateManager.color(1, 1, 1);
+		GlStateManager.disableCull();
 		GlStateManager.enableTexture2D();
-		
+
 		mc.renderEngine.bindTexture(skybox);
-		
+
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0, -40, 0);
 		GlStateManager.rotate(mc.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1, 0, 0);
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		
+
 		wr.pos(-distance, -distance, -distance).tex(0, 1 - y).endVertex();
-		wr.pos(distance, -distance, -distance) .tex(x, 1 - y).endVertex();
-		wr.pos(distance, distance, -distance)  .tex(x, 1 -y * 2).endVertex();
-		wr.pos(-distance, distance, -distance) .tex(0, 1 - y * 2).endVertex();
-		
-		wr.pos(distance, -distance, -distance) .tex(x, 1 - y).endVertex();
-		wr.pos(distance, -distance, distance)  .tex(x * 2, 1 - y).endVertex();
-		wr.pos(distance, distance, distance)   .tex(x * 2, 1 - y * 2).endVertex();
-		wr.pos(distance, distance, -distance)  .tex(x, 1 - y * 2).endVertex();
-		
-		wr.pos(distance, -distance, distance)  .tex(x * 2, 1 - y).endVertex();
-		wr.pos(-distance, -distance, distance) .tex(x * 3, 1 - y).endVertex();
-		wr.pos(-distance, distance, distance)  .tex(x * 3, 1 - y * 2).endVertex();
-		wr.pos(distance, distance, distance)   .tex(x * 2, 1 - y * 2).endVertex();
-		
-		wr.pos(-distance, -distance, distance) .tex(x * 3, 1 - y).endVertex();
+		wr.pos(distance, -distance, -distance).tex(x, 1 - y).endVertex();
+		wr.pos(distance, distance, -distance).tex(x, 1 - y * 2).endVertex();
+		wr.pos(-distance, distance, -distance).tex(0, 1 - y * 2).endVertex();
+
+		wr.pos(distance, -distance, -distance).tex(x, 1 - y).endVertex();
+		wr.pos(distance, -distance, distance).tex(x * 2, 1 - y).endVertex();
+		wr.pos(distance, distance, distance).tex(x * 2, 1 - y * 2).endVertex();
+		wr.pos(distance, distance, -distance).tex(x, 1 - y * 2).endVertex();
+
+		wr.pos(distance, -distance, distance).tex(x * 2, 1 - y).endVertex();
+		wr.pos(-distance, -distance, distance).tex(x * 3, 1 - y).endVertex();
+		wr.pos(-distance, distance, distance).tex(x * 3, 1 - y * 2).endVertex();
+		wr.pos(distance, distance, distance).tex(x * 2, 1 - y * 2).endVertex();
+
+		wr.pos(-distance, -distance, distance).tex(x * 3, 1 - y).endVertex();
 		wr.pos(-distance, -distance, -distance).tex(x * 4, 1 - y).endVertex();
-		wr.pos(-distance, distance, -distance) .tex(x * 4, 1 - y * 2).endVertex();
-		wr.pos(-distance, distance, distance)  .tex(x * 3, 1 - y * 2).endVertex();
-		
-		wr.pos(distance, distance, -distance)  .tex(x, 1 - y * 2).endVertex();
-		wr.pos(distance, distance, distance)   .tex(x * 2, 1 - y * 2).endVertex();
-		wr.pos(-distance, distance, distance)  .tex(x * 2, 1 - y * 3).endVertex();
-		wr.pos(-distance, distance, -distance) .tex(x, 1 - y * 3).endVertex();
-		
-		wr.pos(distance, -distance, -distance) .tex(x, 1 - y).endVertex();
-		wr.pos(distance, -distance, distance)  .tex(x * 2, 1 - y).endVertex();
-		wr.pos(-distance, -distance, distance) .tex(x * 2, 1).endVertex();
+		wr.pos(-distance, distance, -distance).tex(x * 4, 1 - y * 2).endVertex();
+		wr.pos(-distance, distance, distance).tex(x * 3, 1 - y * 2).endVertex();
+
+		wr.pos(distance, distance, -distance).tex(x, 1 - y * 2).endVertex();
+		wr.pos(distance, distance, distance).tex(x * 2, 1 - y * 2).endVertex();
+		wr.pos(-distance, distance, distance).tex(x * 2, 1 - y * 3).endVertex();
+		wr.pos(-distance, distance, -distance).tex(x, 1 - y * 3).endVertex();
+
+		wr.pos(distance, -distance, -distance).tex(x, 1 - y).endVertex();
+		wr.pos(distance, -distance, distance).tex(x * 2, 1 - y).endVertex();
+		wr.pos(-distance, -distance, distance).tex(x * 2, 1).endVertex();
 		wr.pos(-distance, -distance, -distance).tex(x, 1).endVertex();
-		
+
 		tes.draw();
-		
+
 		GlStateManager.popMatrix();
+
+		GlStateManager.disableTexture2D();
+		GlStateManager.enableAlpha();
+		GlStateManager.enableBlend();
+		GlStateManager.shadeModel(GL11.GL_SMOOTH);
+		GlStateManager.alphaFunc(GL11.GL_GREATER, 0);
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		/** "Something like Fog" */
+		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+
+		for (float angle = 0; angle < 360; angle += 30) {
+			float sin1 = MathHelper.sin((float) Math.toRadians(angle)) * distanceF;
+			float sin2 = MathHelper.sin((float) Math.toRadians(angle + 30)) * distanceF;
+			float cos1 = MathHelper.cos((float) Math.toRadians(angle)) * distanceF;
+			float cos2 = MathHelper.cos((float) Math.toRadians(angle + 30)) * distanceF;
+			
+			wr.pos(sin1, 0, cos1).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin2, 0, cos2).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin2, 40, cos2).color(r, g, b * 2, 0).endVertex();
+			wr.pos(sin1, 40, cos1).color(r, g, b * 2, 0).endVertex();
+			
+			wr.pos(sin1, -200, cos1).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin2, -200, cos2).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin2, 0, cos2).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin1, 0, cos1).color(r, g, b * 2, 255).endVertex();
+		}
+
+		tes.draw();
+
+		GlStateManager.alphaFunc(516, 0.1F);
+		GlStateManager.shadeModel(GL11.GL_FLAT);
+		GlStateManager.enableTexture2D();
 		GlStateManager.enableCull();
 	}
 
