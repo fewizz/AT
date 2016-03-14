@@ -8,6 +8,6 @@ public class ATEventHandler {
 	
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event) {
-		CloudRenderer.cloudTickCounter += 3;
+		CloudRenderer.cloudTickCounter += 2;
 	}
 }

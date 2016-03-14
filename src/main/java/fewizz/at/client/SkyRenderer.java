@@ -24,14 +24,13 @@ public class SkyRenderer extends IRenderHandler {
 	float x = 1F / 4F;
 	float y = 1F / 3F;
 	float distance = 0;
-	float distanceF = 0;
 	FloatBuffer fb = GLAllocation.createDirectFloatBuffer(16);
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
 		distance = (mc.gameSettings.renderDistanceChunks * 16) + 30;
-		distanceF = distance - 40;
 		Tessellator tes = Tessellator.getInstance();
+		GlStateManager.disableFog();
 		WorldRenderer wr = tes.getWorldRenderer();
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
@@ -39,10 +38,9 @@ public class SkyRenderer extends IRenderHandler {
 		int g = (int) (fb.get(Rend.GREEN) * 255);
 		int b = (int) (fb.get(Rend.BLUE) * 255);
 		
-		GlStateManager.setFogEnd(distance * 4);
-		
 		GlStateManager.color(1, 1, 1);
 		GlStateManager.disableCull();
+		GlStateManager.disableDepth();
 		GlStateManager.enableTexture2D();
 
 		mc.renderEngine.bindTexture(skybox);
@@ -93,32 +91,34 @@ public class SkyRenderer extends IRenderHandler {
 		GlStateManager.alphaFunc(GL11.GL_GREATER, 0);
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		/** "Something like Fog" */
+		/** "Something like Fog" *****/
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 
 		for (float angle = 0; angle < 360; angle += 30) {
-			float sin1 = MathHelper.sin((float) Math.toRadians(angle)) * distanceF;
-			float sin2 = MathHelper.sin((float) Math.toRadians(angle + 30)) * distanceF;
-			float cos1 = MathHelper.cos((float) Math.toRadians(angle)) * distanceF;
-			float cos2 = MathHelper.cos((float) Math.toRadians(angle + 30)) * distanceF;
+			float sin1 = MathHelper.sin((float) Math.toRadians(angle)) * distance;
+			float sin2 = MathHelper.sin((float) Math.toRadians(angle + 30)) * distance;
+			float cos1 = MathHelper.cos((float) Math.toRadians(angle)) * distance;
+			float cos2 = MathHelper.cos((float) Math.toRadians(angle + 30)) * distance;
 			
-			wr.pos(sin1, 0, cos1).color(r, g, b * 2, 255).endVertex();
-			wr.pos(sin2, 0, cos2).color(r, g, b * 2, 255).endVertex();
-			wr.pos(sin2, 40, cos2).color(r, g, b * 2, 0).endVertex();
-			wr.pos(sin1, 40, cos1).color(r, g, b * 2, 0).endVertex();
+			wr.pos(sin1, -10, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin2, -10, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin2, distance, cos2).color((g + b) / 3, g, b * 2, 0).endVertex();
+			wr.pos(sin1, distance, cos1).color((g + b) / 3, g, b * 2, 0).endVertex();
 			
-			wr.pos(sin1, -200, cos1).color(r, g, b * 2, 255).endVertex();
-			wr.pos(sin2, -200, cos2).color(r, g, b * 2, 255).endVertex();
-			wr.pos(sin2, 0, cos2).color(r, g, b * 2, 255).endVertex();
-			wr.pos(sin1, 0, cos1).color(r, g, b * 2, 255).endVertex();
+			wr.pos(sin1, -200, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin2, -200, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin2, -10, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin1, -10, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
 		}
-
 		tes.draw();
+		/*****************************/
 
 		GlStateManager.alphaFunc(516, 0.1F);
 		GlStateManager.shadeModel(GL11.GL_FLAT);
 		GlStateManager.enableTexture2D();
 		GlStateManager.enableCull();
+		GlStateManager.enableFog();
+		GlStateManager.enableDepth();
 	}
 
 }

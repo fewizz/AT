@@ -1,5 +1,7 @@
 package fewizz.at.client;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
@@ -27,8 +29,8 @@ public class CloudRenderer extends IRenderHandler {
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 
-		float r1 = 0.8F;
-		float g1 = 1;
+		float r1 = 0.5F;
+		float g1 = 1F;
 		float b1 = 1F;
 
 		float r2 = r1 * 0.9F;
@@ -45,6 +47,9 @@ public class CloudRenderer extends IRenderHandler {
 
 		GlStateManager.scale(12.0F, 1.0F, 12.0F);
 		GlStateManager.colorMask(true, true, true, true);
+		
+		float end = GL11.glGetFloat(GL11.GL_FOG_END);
+		GlStateManager.setFogEnd(end * 1.5F);
 
 		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
 

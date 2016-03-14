@@ -63,7 +63,7 @@ public class ATWorldProvider extends WorldProvider {
 
 	@Override
 	public float getCloudHeight() {
-		return 115;
+		return 100;
 	}
 
 	// @Override
