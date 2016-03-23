@@ -38,7 +38,7 @@ public class ATWorldProvider extends WorldProvider {
 	@Override
 	protected void generateLightBrightnessTable() {
 		for (int i = 0; i < 16; i++) {
-			this.lightBrightnessTable[i] = ((float)i / 16f) + 0.2f;
+			this.lightBrightnessTable[i] = (float)i / 16f;
 		}
 	}
 

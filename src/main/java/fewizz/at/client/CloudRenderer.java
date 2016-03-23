@@ -49,7 +49,7 @@ public class CloudRenderer extends IRenderHandler {
 		GlStateManager.colorMask(true, true, true, true);
 		
 		float end = GL11.glGetFloat(GL11.GL_FOG_END);
-		GlStateManager.setFogEnd(end * 1.5F);
+		GlStateManager.setFogEnd(end * 3F);
 
 		worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
 
@@ -86,17 +86,17 @@ public class CloudRenderer extends IRenderHandler {
 						}
 
 						if (height <= 5.0F) {
-							worldrenderer.pos((double) (x + 0.0F), (double) (height + 4.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 8.0F), (double) (height + 4.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 8.0F), (double) (height + 4.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 0.0F), (double) (height + 4.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
 						}
 
 						if (clX > -1) {
 							for (int l1 = 0; l1 < 8; ++l1) {
 								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 0.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
-								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 4.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
-								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 4.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
+								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 6.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
+								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 6.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
 								worldrenderer.pos((double) (x + (float) l1 + 0.0F), (double) (height + 0.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) l1 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(-1.0F, 0.0F, 0.0F).endVertex();
 							}
 						}
@@ -104,16 +104,16 @@ public class CloudRenderer extends IRenderHandler {
 						if (clX <= 1) {
 							for (int i2 = 0; i2 < 8; ++i2) {
 								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 0.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
-								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 4.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
-								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 4.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
+								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 6.0F), (double) (z + 8.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
+								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 6.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
 								worldrenderer.pos((double) (x + (float) i2 + 1.0F - 9.765625E-4F), (double) (height + 0.0F), (double) (z + 0.0F)).tex((double) ((x1 + (float) i2 + 0.5F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r2, g2, b2, 0.8F).normal(1.0F, 0.0F, 0.0F).endVertex();
 							}
 						}
 
 						if (clZ > -1) {
 							for (int j2 = 0; j2 < 8; ++j2) {
-								worldrenderer.pos((double) (x + 0.0F), (double) (height + 4.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
-								worldrenderer.pos((double) (x + 8.0F), (double) (height + 4.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
+								worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
+								worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
 								worldrenderer.pos((double) (x + 8.0F), (double) (height + 0.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
 								worldrenderer.pos((double) (x + 0.0F), (double) (height + 0.0F), (double) (z + (float) j2 + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) j2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, -1.0F).endVertex();
 							}
@@ -121,8 +121,8 @@ public class CloudRenderer extends IRenderHandler {
 
 						if (clZ <= 1) {
 							for (int k2 = 0; k2 < 8; ++k2) {
-								worldrenderer.pos((double) (x + 0.0F), (double) (height + 4.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
-								worldrenderer.pos((double) (x + 8.0F), (double) (height + 4.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
+								worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
+								worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
 								worldrenderer.pos((double) (x + 8.0F), (double) (height + 0.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
 								worldrenderer.pos((double) (x + 0.0F), (double) (height + 0.0F), (double) (z + (float) k2 + 1.0F - 9.765625E-4F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + (float) k2 + 0.5F) * 0.00390625F + texV)).color(r4, g4, b4, 0.8F).normal(0.0F, 0.0F, 1.0F).endVertex();
 							}

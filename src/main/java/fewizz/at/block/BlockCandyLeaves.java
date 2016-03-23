@@ -2,6 +2,7 @@ package fewizz.at.block;
 
 import java.util.List;
 
+import fewizz.at.init.ATItemStacks;
 import fewizz.at.item.block.ItemBlockWithMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -23,18 +24,28 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyLeaves extends BlockLeavesBase {
+public class BlockCandyLeaves extends BlockLeavesBase implements IATBlock {
 
 	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 3);
+
+	@Override
+	public String getName() {
+		return "leaves_candy";
+	}
 
 	public BlockCandyLeaves() {
 		super(Material.leaves, true);
 		this.setStepSound(soundTypeGrass);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 1));
-		this.setUnlocalizedName("leaves_candy");
 		this.fancyGraphics = true;
-		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, "leaves_candy");
+		this.setUnlocalizedName(getName());
+		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
+		
+		ATItemStacks.candyLeaves_0 = new ItemStack(this, 1, 0);
+		ATItemStacks.candyLeaves_4 = new ItemStack(this, 1, 4);
+		ATItemStacks.candyLeaves_8 = new ItemStack(this, 1, 8);
+		ATItemStacks.candyLeaves_12 = new ItemStack(this, 1, 12);
 	}
 
 	@SideOnly(Side.CLIENT)

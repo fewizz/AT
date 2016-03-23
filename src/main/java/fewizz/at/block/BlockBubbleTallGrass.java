@@ -9,6 +9,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -18,16 +19,26 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShearable {
+public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShearable, IATBlock {
 
+	@Override
+	public String getName() {
+		return "tall_grass_bubble";
+	}
+	
 	public BlockBubbleTallGrass() {
 		super();
 		this.setStepSound(soundTypeGrass);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-		this.setUnlocalizedName("tall_grass_bubble");
-		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, "tall_grass_bubble");
+		this.setUnlocalizedName(getName());
+		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 	}
 
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		return Blocks.tallgrass.getDrops(world, pos, state, fortune);
+	}
+	
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return true;

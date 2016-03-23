@@ -5,6 +5,8 @@ import fewizz.at.init.ATBiomes;
 import fewizz.at.init.ATBlocks;
 import fewizz.at.init.ATItems;
 import fewizz.at.item.ItemTeleporter;
+import fewizz.at.proxy.Proxy;
+import fewizz.at.util.ATEventHandler;
 import fewizz.at.world.ATWorldProvider;
 import fewizz.at.world.biome.BiomeGenBubble;
 import net.minecraftforge.common.BiomeManager;
@@ -14,12 +16,19 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 @Mod(modid = AT.MODID, version = AT.VERSION)
 public class AT {
 	public static final String MODID = "at";
-	public static final String VERSION = "0.0.6";
+	public static final String VERSION = "0.0.7";
+	
+	@SidedProxy(
+			clientSide = "fewizz.at.proxy.ClientProxy",
+			serverSide = "fewizz.at.proxy.Proxy")
+	public static Proxy proxy;
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
@@ -30,5 +39,10 @@ public class AT {
 		ATItems.init();
 		ATBiomes.init();
 	}
-
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		proxy.registerItemVariants();
+		proxy.registerRenders();
+	}
 }

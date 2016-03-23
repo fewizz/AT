@@ -1,4 +1,4 @@
-package fewizz.at;
+package fewizz.at.util;
 
 import fewizz.at.client.CloudRenderer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -23,16 +23,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSedge extends Block implements IPlantable {
+public class BlockSedge extends Block implements IPlantable, IATBlock {
 
 	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 2);
+
+	@Override
+	public String getName() {
+		return "sedge";
+	}
 
 	public BlockSedge() {
 		super(Material.plants);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, Integer.valueOf(1)));
 		this.setCreativeTab(CreativeTabs.tabBlock);
-		this.setUnlocalizedName("sedge");
-		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, "sedge");
+		this.setUnlocalizedName(getName());
+		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class BlockSedge extends Block implements IPlantable {
 	public EnumWorldBlockLayer getBlockLayer() {
 		return EnumWorldBlockLayer.CUTOUT;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
 		return null;

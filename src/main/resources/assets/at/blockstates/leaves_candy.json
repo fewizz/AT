@@ -1,8 +1,8 @@
 {
     "variants": {
 		"type=0": { "model": "at:leaves_candy_0" },
-		"type=1": { "model": "at:leaves_candy_1" },
-		"type=2": { "model": "at:leaves_candy_2" },
-		"type=3": { "model": "at:leaves_candy_3" }
+		"type=1": { "model": "at:leaves_candy_4" },
+		"type=2": { "model": "at:leaves_candy_8" },
+		"type=3": { "model": "at:leaves_candy_12" }
     }
 }
