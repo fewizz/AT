@@ -41,9 +41,9 @@ public class CloudRenderer extends IRenderHandler {
 		float g3 = g1 * 0.7F;
 		float b3 = b1 * 0.7F;
 
-		float r4 = r1 * 0.8F;
-		float g4 = g1 * 0.8F;
-		float b4 = b1 * 0.8F;
+		float r4 = r1 * 0.87F;
+		float g4 = g1 * 0.87F;
+		float b4 = b1 * 0.87F;
 
 		GlStateManager.scale(12.0F, 1.0F, 12.0F);
 		GlStateManager.colorMask(true, true, true, true);

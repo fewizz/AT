@@ -1,7 +1,9 @@
 package fewizz.at.proxy;
 
-import fewizz.at.block.IATBlock;
 import fewizz.at.init.ATBlocks;
+import fewizz.at.init.ATItems;
+import fewizz.at.util.IHasName;
+
 import static fewizz.at.init.ATItemStacks.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -16,25 +18,37 @@ public class ClientProxy extends Proxy {
 
 	@Override
 	public void registerRenders() {
+		/** Blocks **/
 		registerRender(ATBlocks.bubbleDirt);
 		registerRender(ATBlocks.bubbleGrass);
 		registerRender(ATBlocks.candyLeaves, 0);
 		registerRender(ATBlocks.candyLeaves, 4);
 		registerRender(ATBlocks.candyLeaves, 8);
 		registerRender(ATBlocks.candyLeaves, 12);
+		
+		/** Items **/
+		registerRender(ATItems.teleporter);
 	}
-	
+
 	@Override
 	public void registerItemVariants() {
 		registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
 	}
 
 	/** Without meta **/
-	public void registerRender(Block block) {
-		if (block instanceof IATBlock)
-			this.registerRender(Item.getItemFromBlock(block), ((IATBlock) block).getName());
+	public void registerRender(Item item) {
+		if (item instanceof IHasName)
+			this.registerRender(item, ((IHasName) item).getName());
 		else
-			this.registerRender(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(5));
+			this.registerRender(item, item.getUnlocalizedName().substring("item.".length()));
+	}
+
+	/** Without meta **/
+	public void registerRender(Block block) {
+		if (block instanceof IHasName)
+			this.registerRender(Item.getItemFromBlock(block), ((IHasName) block).getName());
+		else
+			this.registerRender(Item.getItemFromBlock(block), block.getUnlocalizedName().substring("tile.".length()));
 	}
 
 	public void registerRender(Item item, String name) {
@@ -43,10 +57,10 @@ public class ClientProxy extends Proxy {
 
 	/** With meta **/
 	public void registerRender(Block block, int meta) {
-		if (block instanceof IATBlock)
-			this.registerRender(Item.getItemFromBlock(block), ((IATBlock) block).getName(), meta);
+		if (block instanceof IHasName)
+			this.registerRender(Item.getItemFromBlock(block), ((IHasName) block).getName(), meta);
 		else
-			this.registerRender(Item.getItemFromBlock(block), block.getUnlocalizedName().substring(5), meta);
+			this.registerRender(Item.getItemFromBlock(block), block.getUnlocalizedName().substring("tile.".length()), meta);
 	}
 
 	public void registerRender(Item item, String name, int meta) {
@@ -56,7 +70,6 @@ public class ClientProxy extends Proxy {
 	/** Main Registrator **/
 	public void registerRender(Item item, String name, boolean hasMeta, int meta) {
 		if (hasMeta) {
-			System.out.println("at:" + name + "_" + Integer.toString(meta));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation("at:" + name + "_" + meta, "inventory"));
 		}
 		else {
@@ -68,8 +81,8 @@ public class ClientProxy extends Proxy {
 	public void registerItemVariants(ItemStack... stacks) {
 		for (ItemStack stack : stacks) {
 			Block block = Block.getBlockFromItem(stack.getItem());
-			if(block instanceof IATBlock)
-				ModelBakery.registerItemVariants(stack.getItem(), new ResourceLocation("at:" + ((IATBlock) block).getName() + "_" + stack.getMetadata()));
+			if (block instanceof IHasName)
+				ModelBakery.registerItemVariants(stack.getItem(), new ResourceLocation("at:" + ((IHasName) block).getName() + "_" + stack.getMetadata()));
 			else
 				ModelBakery.registerItemVariants(stack.getItem(), new ResourceLocation("at:" + block.getUnlocalizedName().substring(5) + "_" + stack.getMetadata()));
 		}

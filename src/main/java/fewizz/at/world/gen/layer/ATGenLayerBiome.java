@@ -1,5 +1,6 @@
 package fewizz.at.world.gen.layer;
 
+import fewizz.at.init.ATBiomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderSettings;
@@ -56,25 +57,12 @@ public class ATGenLayerBiome extends GenLayer {
 
 	@Override
 	public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight) {
-		//int[] ids = this.parent.getInts(areaX, areaY, areaWidth, areaHeight);
 		int[] arrayToFill = IntCache.getIntCache(areaWidth * areaHeight);
 
 		for (int i = 0; i < areaHeight; ++i) {
 			for (int j = 0; j < areaWidth; ++j) {
 				this.initChunkSeed((long) (j + areaX), (long) (i + areaY));
-				//int k = ids[j + i * areaWidth];
-				//int l = (k & 3840) >> 8;
-				//k = k & -3841;
-
-				//if (this.chunkProviderSettings != null && this.chunkProviderSettings.fixedBiome >= 0) {
-					//arrayToFill[j + i * areaWidth] = this.chunkProviderSettings.fixedBiome;
-				//}
-				//else if (isBiomeOceanic(k)) {
-				//	arrayToFill[j + i * areaWidth] = k;
-				//}
-				//else{
-					arrayToFill[j + i * areaWidth] = 34;
-				//}
+				arrayToFill[j + i * areaWidth] = ATBiomes.bubble.biomeID;
 			}
 
 		}

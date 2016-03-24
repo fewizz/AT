@@ -3,7 +3,9 @@ package fewizz.at.block;
 import java.util.ArrayList;
 import java.util.List;
 
+import fewizz.at.AT;
 import fewizz.at.init.ATBlocks;
+import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BlockBubbleGrass extends Block implements IATBlock {
+public class BlockBubbleGrass extends Block implements IHasName {
 	
 	@Override
 	public String getName() {
@@ -25,7 +27,7 @@ public class BlockBubbleGrass extends Block implements IATBlock {
 
 	public BlockBubbleGrass() {
 		super(Material.grass);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(AT.tab);
 		this.setStepSound(soundTypeGrass);
 		this.setHardness(0.5F);
 		setUnlocalizedName(getName());

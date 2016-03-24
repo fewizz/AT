@@ -1,11 +1,16 @@
 package fewizz.at.world.biome;
 
+import fewizz.at.util.ATConfiguration;
+import fewizz.at.util.IHasName;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class ATBiome extends BiomeGenBase {
+public class ATBiome extends BiomeGenBase implements IHasName{
 	
-	public ATBiome(int id) {
-		super(id);
+	public String name;
+	
+	public ATBiome(String name) {
+		super(ATConfiguration.getBiomeID(name));
+		this.name = name;
 	}
 
 	/** Default: 0.03F*/
@@ -31,5 +36,10 @@ public class ATBiome extends BiomeGenBase {
 	/** Default: 0.6F*/
 	public float getMountainOffset() {
 		return -0.2F;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 }

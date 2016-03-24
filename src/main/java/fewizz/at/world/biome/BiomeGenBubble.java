@@ -3,6 +3,8 @@ package fewizz.at.world.biome;
 import java.util.Random;
 
 import fewizz.at.init.ATBlocks;
+import fewizz.at.util.ATConfiguration;
+import fewizz.at.util.IHasName;
 import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import fewizz.at.world.gen.feature.WorldGenBubbleTallGrass;
 import net.minecraft.block.BlockTallGrass;
@@ -12,14 +14,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.config.Configuration;
 
 public class BiomeGenBubble extends ATBiome {
 
 	public BiomeGenBubble() {
-		super(34);
+		super("ATBubble");
+
 		this.maxHeight = 0.3F;
 		this.minHeight = 0.35f;
-		this.biomeName = "ATBubble";
+		this.biomeName = getName();
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 256;

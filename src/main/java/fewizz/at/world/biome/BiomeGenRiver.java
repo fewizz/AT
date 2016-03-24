@@ -3,6 +3,7 @@ package fewizz.at.world.biome;
 import java.util.Random;
 
 import fewizz.at.init.ATBlocks;
+import fewizz.at.util.ATConfiguration;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -12,9 +13,9 @@ import net.minecraft.world.chunk.ChunkPrimer;
 public class BiomeGenRiver extends ATBiome {
 
 	public BiomeGenRiver() {
-		super(36);
+		super("ATRiver");
 
-		this.setBiomeName("ATRiver");
+		this.biomeName = getName();
 		this.minHeight = -0.5F;
 		this.maxHeight = 0.2F;
 		this.topBlock = Blocks.sand.getDefaultState();

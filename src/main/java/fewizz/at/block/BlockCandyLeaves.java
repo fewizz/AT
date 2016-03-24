@@ -2,8 +2,10 @@ package fewizz.at.block;
 
 import java.util.List;
 
+import fewizz.at.AT;
 import fewizz.at.init.ATItemStacks;
 import fewizz.at.item.block.ItemBlockWithMeta;
+import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
@@ -24,7 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyLeaves extends BlockLeavesBase implements IATBlock {
+public class BlockCandyLeaves extends BlockLeavesBase implements IHasName {
 
 	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 3);
 
@@ -36,7 +38,7 @@ public class BlockCandyLeaves extends BlockLeavesBase implements IATBlock {
 	public BlockCandyLeaves() {
 		super(Material.leaves, true);
 		this.setStepSound(soundTypeGrass);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(AT.tab);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 1));
 		this.fancyGraphics = true;
 		this.setUnlocalizedName(getName());

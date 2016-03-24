@@ -2,6 +2,8 @@ package fewizz.at.world.biome;
 
 import java.util.Random;
 
+import fewizz.at.util.ATConfiguration;
+import fewizz.at.util.IHasName;
 import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
@@ -19,9 +21,8 @@ public class BiomeGenMountain extends ATBiome {
 	IBlockState snow;
 
 	public BiomeGenMountain() {
-		super(35);
-
-		this.biomeName = "ATMountain";
+		super("ATMountain");
+		this.biomeName = getName();
 		this.topBlock = Blocks.stone.getStateFromMeta(3); // Diorite
 		this.fillerBlock = Blocks.stone.getStateFromMeta(3);
 		this.snow = Blocks.snow.getDefaultState();

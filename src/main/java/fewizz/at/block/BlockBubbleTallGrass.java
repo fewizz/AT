@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import fewizz.at.item.block.ItemBlockWithMeta;
+import fewizz.at.util.IHasName;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShearable, IATBlock {
+public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShearable, IHasName {
 
 	@Override
 	public String getName() {
@@ -29,7 +30,6 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 	public BlockBubbleTallGrass() {
 		super();
 		this.setStepSound(soundTypeGrass);
-		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setUnlocalizedName(getName());
 		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 	}

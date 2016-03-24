@@ -1,5 +1,8 @@
 package fewizz.at.item;
 
+import fewizz.at.AT;
+import fewizz.at.util.ATConfiguration;
+import fewizz.at.util.IHasName;
 import fewizz.at.world.ATTeleporter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,19 +14,22 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemTeleporter extends Item {
+public class ItemTeleporter extends Item  implements IHasName {
+	
+	@Override
+	public String getName() {
+		return "teleporter";
+	}
+	
 	public ItemTeleporter() {
-		setCreativeTab(CreativeTabs.tabFood);
-		GameRegistry.registerItem(this, "teleporter");
+		setCreativeTab(AT.tab);
+		GameRegistry.registerItem(this, getName());
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		if (!worldIn.isRemote) {
-			//if (playerIn.dimension == -1)
-				((EntityPlayerMP) playerIn).mcServer.getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) playerIn, 3, new ATTeleporter(((EntityPlayerMP) playerIn).mcServer.worldServerForDimension(3)));
-			//else
-				//playerIn.travelToDimension(-1);
+			((EntityPlayerMP) playerIn).mcServer.getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) playerIn, ATConfiguration.dimID, new ATTeleporter(((EntityPlayerMP) playerIn).mcServer.worldServerForDimension(ATConfiguration.dimID)));
 		}
 		return itemStackIn;
 	}

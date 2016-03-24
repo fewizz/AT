@@ -1,5 +1,7 @@
 package fewizz.at.block;
 
+import fewizz.at.AT;
+import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BlockBubbleDirt extends Block implements IATBlock {
+public class BlockBubbleDirt extends Block implements IHasName {
 
 	@Override
 	public String getName() {
@@ -19,7 +21,7 @@ public class BlockBubbleDirt extends Block implements IATBlock {
 	
 	public BlockBubbleDirt() {
 		super(Material.cloth);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(AT.tab);
 		this.setStepSound(soundTypeGrass);
 		this.setHardness(0.5F);
 		this.setUnlocalizedName(getName());

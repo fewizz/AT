@@ -1,8 +1,12 @@
 package fewizz.at.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import fewizz.at.AT;
+import fewizz.at.init.ATBlocks;
 import fewizz.at.item.block.ItemBlockWithMeta;
+import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -23,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSedge extends Block implements IPlantable, IATBlock {
+public class BlockSedge extends Block implements IPlantable, IHasName {
 
 	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 2);
 
@@ -34,8 +38,8 @@ public class BlockSedge extends Block implements IPlantable, IATBlock {
 
 	public BlockSedge() {
 		super(Material.plants);
+		this.setStepSound(soundTypeGrass);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, Integer.valueOf(1)));
-		this.setCreativeTab(CreativeTabs.tabBlock);
 		this.setUnlocalizedName(getName());
 		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 	}
@@ -56,10 +60,19 @@ public class BlockSedge extends Block implements IPlantable, IATBlock {
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
-		list.add(new ItemStack(this, 1, 2));
+	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+		BlockPos posBot = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+		BlockPos posTop = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+		
+		if (worldIn.getBlockState(posBot).getBlock().getMaterial() == Material.air) {
+			worldIn.destroyBlock(pos, true);
+		}
+		
+		if (worldIn.getBlockState(posTop).getBlock().getMaterial() == Material.air) {
+			if (worldIn.getBlockState(pos).getBlock() == ATBlocks.sedge && ATBlocks.sedge.getMetaFromState(worldIn.getBlockState(pos)) != 2) {
+				worldIn.destroyBlock(pos, true);
+			}
+		}
 	}
 
 	@Override
@@ -70,6 +83,11 @@ public class BlockSedge extends Block implements IPlantable, IATBlock {
 	@Override
 	public boolean isFullCube() {
 		return false;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		return new ArrayList<ItemStack>();
 	}
 
 	@SideOnly(Side.CLIENT)

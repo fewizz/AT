@@ -36,6 +36,10 @@ public class ATWorldProvider extends WorldProvider {
 	}
 
 	@Override
+	public boolean canCoordinateBeSpawn(int x, int z) {
+		return true;
+	}
+	@Override
 	protected void generateLightBrightnessTable() {
 		for (int i = 0; i < 16; i++) {
 			this.lightBrightnessTable[i] = (float)i / 16f;

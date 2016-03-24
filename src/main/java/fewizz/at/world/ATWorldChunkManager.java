@@ -167,29 +167,7 @@ public class ATWorldChunkManager extends WorldChunkManager {
 
 	@Override
 	public BlockPos findBiomePosition(int x, int z, int range, List<BiomeGenBase> biomes, Random random) {
-		IntCache.resetIntCache();
-		int i = x - range >> 2;
-		int j = z - range >> 2;
-		int k = x + range >> 2;
-		int l = z + range >> 2;
-		int i1 = k - i + 1;
-		int j1 = l - j + 1;
-		int[] aint = this.genBiomes.getInts(i, j, i1, j1);
-		BlockPos blockpos = null;
-		int k1 = 0;
-
-		for (int l1 = 0; l1 < i1 * j1; ++l1) {
-			int i2 = i + l1 % i1 << 2;
-			int j2 = j + l1 / i1 << 2;
-			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[l1]);
-
-			if (biomes.contains(biomegenbase) && (blockpos == null || random.nextInt(k1 + 1) == 0)) {
-				blockpos = new BlockPos(i2, 0, j2);
-				++k1;
-			}
-		}
-
-		return blockpos;
+		return new BlockPos(0, 0, 0);
 	}
 
 	/**
