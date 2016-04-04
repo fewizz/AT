@@ -6,10 +6,38 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class ATBiome extends BiomeGenBase implements IHasName{
 	
+	public int biomeID;
 	public String name;
 	
 	public ATBiome(String name) {
-		super(ATConfiguration.getBiomeID(name));
+		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
+		super(new BiomeProperties(name));
+		biomeID = ATConfiguration.getBiomeID(name);
+		BiomeGenBase.registerBiome(biomeID, name, this);
+		this.name = name;
+	}
+	
+	public ATBiome(String name, float height, float var) {
+		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
+		super(new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var));
+		biomeID = ATConfiguration.getBiomeID(name);
+		BiomeGenBase.registerBiome(biomeID, name, this);
+		this.name = name;
+	}
+	
+	public ATBiome(String name, float height, float var, float temt) {
+		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
+		super(new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var).setTemperature(temt));
+		biomeID = ATConfiguration.getBiomeID(name);
+		BiomeGenBase.registerBiome(biomeID, name, this);
+		this.name = name;
+	}
+	
+	public ATBiome(String name, BiomeGenBase.BiomeProperties prop) {
+		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
+		super(prop);
+		biomeID = ATConfiguration.getBiomeID(name);
+		BiomeGenBase.registerBiome(biomeID, name, this);
 		this.name = name;
 	}
 

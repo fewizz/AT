@@ -9,7 +9,7 @@ import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -20,7 +20,7 @@ public class WorldGenBubbleTallGrass extends WorldGenerator {
 
 		do {
 			block = worldIn.getBlockState(position).getBlock();
-			if (!block.isAir(worldIn, position) && !block.isLeaves(worldIn, position))
+			if (!block.isAir(worldIn.getBlockState(position), worldIn, position) && !block.isLeaves(worldIn.getBlockState(position), worldIn, position))
 				break;
 			position = position.down();
 		}

@@ -9,10 +9,10 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.IRenderHandler;
 
 import static fewizz.at.client.Rend.*;
@@ -31,7 +31,7 @@ public class SkyRenderer extends IRenderHandler {
 		distance = (mc.gameSettings.renderDistanceChunks * 16) + 30;
 		Tessellator tes = Tessellator.getInstance();
 		GlStateManager.disableFog();
-		WorldRenderer wr = tes.getWorldRenderer();
+		VertexBuffer wr = tes.getBuffer();
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
 		int r = (int) (fb.get(Rend.RED) * 255);

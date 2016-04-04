@@ -5,8 +5,10 @@ import java.lang.reflect.Field;
 import fewizz.at.client.CloudRenderer;
 import fewizz.at.client.SkyRenderer;
 import fewizz.at.client.WeatherRenderer;
+import fewizz.at.util.ATConfiguration;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 
@@ -17,22 +19,12 @@ public class ATWorldProvider extends WorldProvider {
 
 	@Override
 	protected void registerWorldChunkManager() {
-		this.worldChunkMgr = new ATWorldChunkManager(this.worldObj);
+		this.worldChunkMgr = new ATWorldChunkManager(worldObj);
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
+	public IChunkGenerator createChunkGenerator() {
 		return new ATChunkProvider(worldObj, worldObj.getSeed(), true);
-	}
-
-	@Override
-	public String getDimensionName() {
-		return "AT";
-	}
-
-	@Override
-	public String getInternalNameSuffix() {
-		return "1";
 	}
 
 	@Override
@@ -82,6 +74,11 @@ public class ATWorldProvider extends WorldProvider {
 	@Override
 	public boolean isSurfaceWorld() {
 		return true;
+	}
+
+	@Override
+	public DimensionType getDimensionType() {
+		return DimensionType.getById(ATConfiguration.dimID);
 	}
 
 }

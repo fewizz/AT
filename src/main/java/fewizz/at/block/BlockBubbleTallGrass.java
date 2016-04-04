@@ -12,7 +12,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -29,16 +30,17 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 	
 	public BlockBubbleTallGrass() {
 		super();
-		this.setStepSound(soundTypeGrass);
+		//this.setStepSound(soundTypeGrass);
 		this.setUnlocalizedName(getName());
-		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
+		//GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
+		GameRegistry.register(this, new ResourceLocation("at", getName()));
 	}
 
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		return Blocks.tallgrass.getDrops(world, pos, state, fortune);
 	}
-	
+
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return true;
@@ -51,17 +53,17 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return true;
+		return false;
 	}
 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-
+		
 	}
 
 }

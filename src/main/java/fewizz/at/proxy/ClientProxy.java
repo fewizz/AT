@@ -7,8 +7,8 @@ import fewizz.at.util.IHasName;
 import static fewizz.at.init.ATItemStacks.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,10 +21,10 @@ public class ClientProxy extends Proxy {
 		/** Blocks **/
 		registerRender(ATBlocks.bubbleDirt);
 		registerRender(ATBlocks.bubbleGrass);
-		registerRender(ATBlocks.candyLeaves, 0);
-		registerRender(ATBlocks.candyLeaves, 4);
-		registerRender(ATBlocks.candyLeaves, 8);
-		registerRender(ATBlocks.candyLeaves, 12);
+		//registerRender(ATBlocks.candyLeaves, 0);
+		//registerRender(ATBlocks.candyLeaves, 4);
+		//registerRender(ATBlocks.candyLeaves, 8);
+		//registerRender(ATBlocks.candyLeaves, 12);
 		
 		/** Items **/
 		registerRender(ATItems.teleporter);
@@ -32,7 +32,7 @@ public class ClientProxy extends Proxy {
 
 	@Override
 	public void registerItemVariants() {
-		registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
+		//registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
 	}
 
 	/** Without meta **/

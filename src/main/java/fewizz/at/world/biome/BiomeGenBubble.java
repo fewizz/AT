@@ -9,7 +9,7 @@ import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import fewizz.at.world.gen.feature.WorldGenBubbleTallGrass;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -19,11 +19,11 @@ import net.minecraftforge.common.config.Configuration;
 public class BiomeGenBubble extends ATBiome {
 
 	public BiomeGenBubble() {
-		super("ATBubble");
+		super("ATBubble", 0.3F, 0.35F);
 
-		this.maxHeight = 0.3F;
-		this.minHeight = 0.35f;
-		this.biomeName = getName();
+		//this.maxHeight = 0.3F;
+		//this.minHeight = 0.35f;
+		//this.biomeName = getName();
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 256;

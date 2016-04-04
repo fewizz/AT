@@ -9,19 +9,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.MapGenCaves;
@@ -37,7 +35,7 @@ import net.minecraft.world.gen.structure.MapGenStronghold;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 
-public class ATChunkProvider implements IChunkProvider {
+public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 	private final SimplexNoise noise = new SimplexNoise();
 	private final SimplexNoise noiseMount = new SimplexNoise();
 	private Random rand;
@@ -61,7 +59,7 @@ public class ATChunkProvider implements IChunkProvider {
 		float[] heights = new float[length * length];
 		byte[] biomeIds = new byte[256];
 
-		this.worldObj.getWorldChunkManager().getBiomesForGeneration(biomes, (x << 4) - offset, (z << 4) - offset, length, length);
+		this.worldObj.getBiomeProvider().getBiomesForGeneration(biomes, (x << 4) - offset, (z << 4) - offset, length, length);
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 
@@ -98,7 +96,7 @@ public class ATChunkProvider implements IChunkProvider {
 					}
 				}
 
-				heights[index] = (int) (waterLevel + (biome.minHeight * heightRatio * strength) + (noiseValue * (biome.maxHeight * strength)));
+				heights[index] = (int) (waterLevel + (biome.getBaseHeight() * heightRatio * strength) + (noiseValue * (biome.getHeightVariation() * strength)));
 			}
 		}
 
@@ -106,7 +104,7 @@ public class ATChunkProvider implements IChunkProvider {
 			for (int chZ = 0; chZ < 16; chZ++) {
 				int index = (chX + offset) + ((chZ + offset) * length);
 				BiomeGenBase curBiome = biomes[index];
-				biomeIds[chX | (chZ << 4)] = (byte) curBiome.biomeID;
+				biomeIds[chX | (chZ << 4)] = (byte) BiomeGenBase.getIdForBiome(curBiome);//(byte) curBiome.;
 
 				/** Smoothing ********************/
 				float count = 0;
@@ -144,60 +142,57 @@ public class ATChunkProvider implements IChunkProvider {
 		return true;
 	}
 
-	public void populate(IChunkProvider chunkProvider, int chX, int chZ) {
+	public void populate(int chX, int chZ) {
 		int x = chX * 16;
 		int z = chZ * 16;
 		BlockPos blockpos = new BlockPos(x, 0, z);
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
-		if (biomegenbase.theBiomeDecorator.currentWorld != null) {
-			Chunk chunk = worldObj.getChunkFromChunkCoords(chX, chZ);
-			chunk.setTerrainPopulated(false);
-			return;
-		}
+		//if (biomegenbase.theBiomeDecorator. != null) {
+		//	Chunk chunk = worldObj.getChunkFromChunkCoords(chX, chZ);
+		//	chunk.setTerrainPopulated(false);
+		//	return;
+		//}
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(x, 0, z));
 	}
 
-	public boolean populateChunk(IChunkProvider chunkProvider, Chunk chunk, int x, int z) {
-		return true;
-	}
-
-	public boolean saveChunks(boolean saveAllChunks, IProgressUpdate progressCallback) {
-		return true;
-	}
-
-	public void saveExtraData() {
-	}
-
+	@Override
 	public boolean unloadQueuedChunks() {
 		return false;
 	}
 
-	public boolean canSave() {
-		return true;
-	}
-
+	@Override
 	public String makeString() {
 		return "RandomLevelSource";
 	}
 
+	@Override
 	public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
 		return biomegenbase.getSpawnableList(creatureType);
 	}
 
+	@Override
 	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
 		return null;
 	}
 
-	public int getLoadedChunkCount() {
-		return 0;
-	}
-
+	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
 	}
 
-	public Chunk provideChunk(BlockPos blockPosIn) {
-		return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	//@Override
+	//public Chunk provideChunk(BlockPos blockPosIn) {
+	//	return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
+	//}
+
+	@Override
+	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+		return false;
+	}
+
+	@Override
+	public Chunk getLoadedChunk(int x, int z) {
+		return worldObj.getChunkFromChunkCoords(x, z);
 	}
 
 }

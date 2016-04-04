@@ -11,7 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EntityBreakingFX.SnowballFactory;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -22,11 +22,11 @@ public class BiomeGenMountain extends ATBiome {
 
 	public BiomeGenMountain() {
 		super("ATMountain");
-		this.biomeName = getName();
+		//this.biomeName = getName();
 		this.topBlock = Blocks.stone.getStateFromMeta(3); // Diorite
 		this.fillerBlock = Blocks.stone.getStateFromMeta(3);
 		this.snow = Blocks.snow.getDefaultState();
-		this.temperature = -10F;
+		//this.temperature = -10F;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BiomeGenMountain extends ATBiome {
 			else {
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(x, height, z);
 
-				if (iblockstate2.getBlock().getMaterial() == Material.air) {
+				if (iblockstate2.getBlock() == Blocks.air) {
 					j = -1;
 				}
 				else if (iblockstate2.getBlock() == Blocks.stone) {

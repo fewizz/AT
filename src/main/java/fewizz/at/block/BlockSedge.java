@@ -11,14 +11,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -38,15 +36,15 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 
 	public BlockSedge() {
 		super(Material.plants);
-		this.setStepSound(soundTypeGrass);
+		//this.setStepSound(soundTypeGrass);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, Integer.valueOf(1)));
 		this.setUnlocalizedName(getName());
 		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 	}
 
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, new IProperty[] { TYPE });
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@Override
@@ -59,7 +57,7 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 		return state.getValue(TYPE);
 	}
 
-	@Override
+	/*@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
 		BlockPos posBot = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 		BlockPos posTop = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
@@ -73,41 +71,53 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 				worldIn.destroyBlock(pos, true);
 			}
 		}
-	}
+	}*/
 
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+	//@Override
+	//public boolean isOpaqueCube() {
+	//	return false;
+	//}
 
-	@Override
-	public boolean isFullCube() {
-		return false;
-	}
+	//@Override
+	//public boolean isFullCube() {
+	//	return false;
+	//}
 
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		return new ArrayList<ItemStack>();
 	}
 
-	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer() {
-		return EnumWorldBlockLayer.CUTOUT;
-	}
+	//@SideOnly(Side.CLIENT)
+	//public EnumWorldBlockLayer getBlockLayer() {
+	//	return EnumWorldBlockLayer.CUTOUT;
+	//}
+
+	//@Override
+	//public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+	//	return null;
+	//}
+
+	//@Override
+	//public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+	//	return EnumPlantType.Beach;
+	//}
+
+	//@Override
+	//public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+	//	return this.getDefaultState();
+	//}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+	public EnumPlantType getPlantType(IBlockAccess world, net.minecraft.util.math.BlockPos pos) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-		return EnumPlantType.Beach;
-	}
-
-	@Override
-	public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-		return this.getDefaultState();
+	public IBlockState getPlant(IBlockAccess world, net.minecraft.util.math.BlockPos pos) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

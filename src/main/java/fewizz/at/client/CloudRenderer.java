@@ -6,11 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.IRenderHandler;
 
 public class CloudRenderer extends IRenderHandler {
@@ -22,7 +21,7 @@ public class CloudRenderer extends IRenderHandler {
 		GlStateManager.disableCull();
 		GlStateManager.setFogEnd(((mc.gameSettings.renderDistanceChunks * 16) - 70) * 3);
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		VertexBuffer worldrenderer = tessellator.getBuffer();
 		double tick = this.cloudTickCounter + partialTicks;
 		float height = (float) (mc.theWorld.provider.getCloudHeight() - (mc.getRenderViewEntity().prevPosY + (mc.getRenderViewEntity().posY - mc.getRenderViewEntity().prevPosY) * partialTicks));
 		mc.renderEngine.bindTexture(locationCloudsPng);

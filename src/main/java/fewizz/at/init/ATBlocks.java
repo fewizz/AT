@@ -19,7 +19,7 @@ public class ATBlocks {
 		bubbleGrass = new BlockBubbleGrass();
 		bubbleDirt = new BlockBubbleDirt();
 		bubbleTallGrass = new BlockBubbleTallGrass();
-		candyLeaves = new BlockCandyLeaves();
+		//candyLeaves = new BlockCandyLeaves();
 		sedge = new BlockSedge();
 	}
 

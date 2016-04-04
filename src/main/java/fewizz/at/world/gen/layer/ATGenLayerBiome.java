@@ -1,6 +1,7 @@
 package fewizz.at.world.gen.layer;
 
 import fewizz.at.init.ATBiomes;
+import net.minecraft.init.Biomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderSettings;
@@ -33,18 +34,18 @@ public class ATGenLayerBiome extends GenLayer {
 
 		int desertIdx = net.minecraftforge.common.BiomeManager.BiomeType.DESERT.ordinal();
 
-		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.desert, 30));
-		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.savanna, 20));
-		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.plains, 10));
+		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.desert, 30));
+		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.savanna, 20));
+		biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.plains, 10));
 
 		if (worldType == WorldType.DEFAULT_1_1) {
 			biomes[desertIdx].clear();
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.desert, 10));
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.forest, 10));
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.extremeHills, 10));
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.swampland, 10));
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.plains, 10));
-			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(BiomeGenBase.taiga, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.desert, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.forest, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.extremeHills, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.swampland, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.plains, 10));
+			biomes[desertIdx].add(new net.minecraftforge.common.BiomeManager.BiomeEntry(Biomes.taiga, 10));
 			this.chunkProviderSettings = null;
 		}
 		else if (worldType == WorldType.CUSTOMIZED) {

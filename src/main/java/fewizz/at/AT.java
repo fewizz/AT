@@ -14,6 +14,7 @@ import fewizz.at.util.ATEventHandler;
 import fewizz.at.world.ATWorldProvider;
 import fewizz.at.world.biome.BiomeGenBubble;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
@@ -46,8 +47,9 @@ public class AT {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new ATEventHandler());
-		DimensionManager.registerProviderType(ATConfiguration.dimID, ATWorldProvider.class, true);
-		DimensionManager.registerDimension(ATConfiguration.dimID, ATConfiguration.dimID);
+		//DimensionManager.registerProviderType(ATConfiguration.dimID, ATWorldProvider.class, true);
+		DimensionType.register("AT", "1", ATConfiguration.dimID, ATWorldProvider.class, true);
+		DimensionManager.registerDimension(ATConfiguration.dimID, DimensionType.getById(ATConfiguration.dimID));
 		ATBlocks.init();
 		ATItems.init();
 		ATBiomes.init();

@@ -12,8 +12,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -28,14 +28,14 @@ public class BlockBubbleGrass extends Block implements IHasName {
 	public BlockBubbleGrass() {
 		super(Material.grass);
 		this.setCreativeTab(AT.tab);
-		this.setStepSound(soundTypeGrass);
+		//this.setStepSound(soundTypeGrass);
 		this.setHardness(0.5F);
 		setUnlocalizedName(getName());
 		GameRegistry.registerBlock(this, getName());
 	}
-
+	
 	@Override
-	public boolean canSustainPlant(IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
 		return true;
 	}
 	

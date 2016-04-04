@@ -12,8 +12,8 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
@@ -37,7 +37,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	public WorldGenBigCandyTree(int leafType) {
 		super(false);
 		this.leafType = leafType;
-		state = ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType);
+		state = ATBlocks.bubbleGrass.getDefaultState();//ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 					BlockPos blockpos = pos.add(j, 0, k);
 					net.minecraft.block.state.IBlockState state = this.world.getBlockState(blockpos);
 
-					if (state.getBlock().isAir(this.world, blockpos) || state.getBlock().isLeaves(this.world, blockpos)) {
+					if (state.getBlock().isAir(state, this.world, blockpos) || state.getBlock().isLeaves(state, this.world, blockpos)) {
 						this.setBlockAndNotifyAdequately(this.world, blockpos, blockstate);
 					}
 				}
@@ -288,7 +288,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			return true;
 		}
 
-		boolean isSoil = state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
+		boolean isSoil = true;//state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
 
 		if (!isSoil) {
 			return false;

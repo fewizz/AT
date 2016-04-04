@@ -28,7 +28,7 @@ public class ATConfiguration {
 	}
 	
 	public static int getFreeBiomeID() {
-		for(int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++) {
+		for(int i = 0; i < 256; i++) {
 			if(BiomeGenBase.getBiome(i) == null) {
 				return i;
 			}
