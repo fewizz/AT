@@ -21,10 +21,10 @@ public class ClientProxy extends Proxy {
 		/** Blocks **/
 		registerRender(ATBlocks.bubbleDirt);
 		registerRender(ATBlocks.bubbleGrass);
-		//registerRender(ATBlocks.candyLeaves, 0);
-		//registerRender(ATBlocks.candyLeaves, 4);
-		//registerRender(ATBlocks.candyLeaves, 8);
-		//registerRender(ATBlocks.candyLeaves, 12);
+		registerRender(ATBlocks.candyLeaves, 0);
+		registerRender(ATBlocks.candyLeaves, 4);
+		registerRender(ATBlocks.candyLeaves, 8);
+		registerRender(ATBlocks.candyLeaves, 12);
 		
 		/** Items **/
 		registerRender(ATItems.teleporter);
@@ -32,7 +32,7 @@ public class ClientProxy extends Proxy {
 
 	@Override
 	public void registerItemVariants() {
-		//registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
+		registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
 	}
 
 	/** Without meta **/

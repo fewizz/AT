@@ -7,10 +7,12 @@ import fewizz.at.item.block.ItemBlockWithMeta;
 import fewizz.at.util.IHasName;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -30,10 +32,10 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 	
 	public BlockBubbleTallGrass() {
 		super();
-		//this.setStepSound(soundTypeGrass);
+		this.setStepSound(SoundType.PLANT);
 		this.setUnlocalizedName(getName());
-		//GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));
+		GameRegistry.register(new ItemBlock(this), new ResourceLocation("at", getName()));
 	}
 
 	@Override

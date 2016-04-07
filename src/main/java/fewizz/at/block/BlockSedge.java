@@ -8,6 +8,7 @@ import fewizz.at.init.ATBlocks;
 import fewizz.at.item.block.ItemBlockWithMeta;
 import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -16,6 +17,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -29,6 +32,8 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 
 	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 2);
 
+	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+
 	@Override
 	public String getName() {
 		return "sedge";
@@ -36,10 +41,11 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 
 	public BlockSedge() {
 		super(Material.plants);
-		//this.setStepSound(soundTypeGrass);
+		this.setStepSound(SoundType.PLANT);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, Integer.valueOf(1)));
 		this.setUnlocalizedName(getName());
-		GameRegistry.registerBlock(this, ItemBlockWithMeta.class, getName());
+		GameRegistry.register(this, new ResourceLocation("at", getName()));
+		GameRegistry.register(new ItemBlockWithMeta(this), new ResourceLocation("at", getName()));
 	}
 
 	@Override
@@ -57,67 +63,57 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 		return state.getValue(TYPE);
 	}
 
-	/*@Override
+	@Override
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
 		BlockPos posBot = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 		BlockPos posTop = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-		
-		if (worldIn.getBlockState(posBot).getBlock().getMaterial() == Material.air) {
+		IBlockState botState = worldIn.getBlockState(posBot);
+		IBlockState topState = worldIn.getBlockState(posTop);
+
+		if (botState.getBlock().getMaterial(botState) == Material.air) {
 			worldIn.destroyBlock(pos, true);
 		}
-		
-		if (worldIn.getBlockState(posTop).getBlock().getMaterial() == Material.air) {
+
+		if (topState.getBlock().getMaterial(topState) == Material.air) {
 			if (worldIn.getBlockState(pos).getBlock() == ATBlocks.sedge && ATBlocks.sedge.getMetaFromState(worldIn.getBlockState(pos)) != 2) {
 				worldIn.destroyBlock(pos, true);
 			}
 		}
-	}*/
-
-	//@Override
-	//public boolean isOpaqueCube() {
-	//	return false;
-	//}
-
-	//@Override
-	//public boolean isFullCube() {
-	//	return false;
-	//}
+	}
 
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		return new ArrayList<ItemStack>();
 	}
 
-	//@SideOnly(Side.CLIENT)
-	//public EnumWorldBlockLayer getBlockLayer() {
-	//	return EnumWorldBlockLayer.CUTOUT;
-	//}
-
-	//@Override
-	//public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
-	//	return null;
-	//}
-
-	//@Override
-	//public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-	//	return EnumPlantType.Beach;
-	//}
-
-	//@Override
-	//public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-	//	return this.getDefaultState();
-	//}
-
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, net.minecraft.util.math.BlockPos pos) {
-		// TODO Auto-generated method stub
-		return null;
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
+		return AABB;
+	}
+	
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+		return NULL_AABB;
 	}
 
 	@Override
-	public IBlockState getPlant(IBlockAccess world, net.minecraft.util.math.BlockPos pos) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+		return EnumPlantType.Beach;
+	}
+
+	@Override
+	public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+		return this.getDefaultState();
 	}
 
 }

@@ -47,7 +47,6 @@ public class AT {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new ATEventHandler());
-		//DimensionManager.registerProviderType(ATConfiguration.dimID, ATWorldProvider.class, true);
 		DimensionType.register("AT", "1", ATConfiguration.dimID, ATWorldProvider.class, true);
 		DimensionManager.registerDimension(ATConfiguration.dimID, DimensionType.getById(ATConfiguration.dimID));
 		ATBlocks.init();

@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -25,14 +26,13 @@ public class ItemTeleporter extends Item  implements IHasName {
 	
 	public ItemTeleporter() {
 		setCreativeTab(AT.tab);
-		GameRegistry.registerItem(this, getName());
+		setUnlocalizedName(getName());
+		GameRegistry.register(this, new ResourceLocation("at", getName()));
 	}
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (!worldIn.isRemote) {
-			//((EntityPlayerMP) playerIn).mcServer.getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) playerIn, ATConfiguration.dimID, new ATTeleporter(((EntityPlayerMP) playerIn).mcServer.worldServerForDimension(ATConfiguration.dimID)));
-			//playerIn.changeDimension(ATConfiguration.dimID);
 			((EntityPlayerMP) playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, ATConfiguration.dimID, new ATTeleporter(((EntityPlayerMP) playerIn).mcServer.worldServerForDimension(ATConfiguration.dimID)));
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);

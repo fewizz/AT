@@ -7,12 +7,15 @@ import fewizz.at.AT;
 import fewizz.at.init.ATBlocks;
 import fewizz.at.util.IHasName;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
@@ -28,10 +31,11 @@ public class BlockBubbleGrass extends Block implements IHasName {
 	public BlockBubbleGrass() {
 		super(Material.grass);
 		this.setCreativeTab(AT.tab);
-		//this.setStepSound(soundTypeGrass);
+		this.setStepSound(SoundType.PLANT);
 		this.setHardness(0.5F);
 		setUnlocalizedName(getName());
-		GameRegistry.registerBlock(this, getName());
+		GameRegistry.register(this, new ResourceLocation("at", getName()));
+		GameRegistry.register(new ItemBlock(this), new ResourceLocation("at", getName()));
 	}
 	
 	@Override

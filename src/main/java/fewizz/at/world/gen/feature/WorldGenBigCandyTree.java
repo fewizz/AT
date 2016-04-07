@@ -12,6 +12,7 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -37,7 +38,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	public WorldGenBigCandyTree(int leafType) {
 		super(false);
 		this.leafType = leafType;
-		state = ATBlocks.bubbleGrass.getDefaultState();//ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType);
+		state = ATBlocks.candyLeaves.getDefaultState().withProperty(BlockCandyLeaves.TYPE, leafType);
 	}
 
 	/**
@@ -288,7 +289,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			return true;
 		}
 
-		boolean isSoil = true;//state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
+		boolean isSoil = state.getBlock().canSustainPlant(state, this.world, down, EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
 
 		if (!isSoil) {
 			return false;

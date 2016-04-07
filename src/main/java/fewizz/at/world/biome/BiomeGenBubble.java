@@ -21,9 +21,6 @@ public class BiomeGenBubble extends ATBiome {
 	public BiomeGenBubble() {
 		super("ATBubble", 0.3F, 0.35F);
 
-		//this.maxHeight = 0.3F;
-		//this.minHeight = 0.35f;
-		//this.biomeName = getName();
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 256;
