@@ -21,12 +21,10 @@ public class BiomeGenMountain extends ATBiome {
 	IBlockState snow;
 
 	public BiomeGenMountain() {
-		super("ATMountain");
-		//this.biomeName = getName();
+		super("ATMountain", -10F);
 		this.topBlock = Blocks.stone.getStateFromMeta(3); // Diorite
 		this.fillerBlock = Blocks.stone.getStateFromMeta(3);
 		this.snow = Blocks.snow.getDefaultState();
-		//this.temperature = -10F;
 	}
 
 	@Override

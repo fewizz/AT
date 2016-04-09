@@ -9,36 +9,27 @@ public class ATBiome extends BiomeGenBase implements IHasName{
 	public int biomeID;
 	public String name;
 	
-	public ATBiome(String name) {
-		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
-		super(new BiomeProperties(name));
-		biomeID = ATConfiguration.getBiomeID(name);
-		BiomeGenBase.registerBiome(biomeID, name, this);
-		this.name = name;
-	}
-	
-	public ATBiome(String name, float height, float var) {
-		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
-		super(new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var));
-		biomeID = ATConfiguration.getBiomeID(name);
-		BiomeGenBase.registerBiome(biomeID, name, this);
-		this.name = name;
-	}
-	
-	public ATBiome(String name, float height, float var, float temt) {
-		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
-		super(new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var).setTemperature(temt));
-		biomeID = ATConfiguration.getBiomeID(name);
-		BiomeGenBase.registerBiome(biomeID, name, this);
-		this.name = name;
-	}
-	
 	public ATBiome(String name, BiomeGenBase.BiomeProperties prop) {
-		//BiomeGenBase.BiomeProperties properties = new BiomeProperties(name);
 		super(prop);
 		biomeID = ATConfiguration.getBiomeID(name);
 		BiomeGenBase.registerBiome(biomeID, name, this);
 		this.name = name;
+	}
+	
+	public ATBiome(String name) {
+		this(name, new BiomeProperties(name));
+	}
+	
+	public ATBiome(String name, float temp) {
+		this(name, new BiomeProperties(name).setTemperature(temp));
+	}
+	
+	public ATBiome(String name, float height, float var) {
+		this(name, new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var));
+	}
+	
+	public ATBiome(String name, float height, float var, float temt) {
+		this(name, new BiomeProperties(name).setBaseHeight(height).setHeightVariation(var).setTemperature(temt));
 	}
 
 	/** Default: 0.03F*/

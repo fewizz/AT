@@ -104,7 +104,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 			for (int chZ = 0; chZ < 16; chZ++) {
 				int index = (chX + offset) + ((chZ + offset) * length);
 				BiomeGenBase curBiome = biomes[index];
-				biomeIds[chX | (chZ << 4)] = (byte) BiomeGenBase.getIdForBiome(curBiome);//(byte) curBiome.;
+				biomeIds[chX | (chZ << 4)] = (byte) BiomeGenBase.getIdForBiome(curBiome);// (byte) curBiome.;
 
 				/** Smoothing ********************/
 				float count = 0;
@@ -147,11 +147,6 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 		int z = chZ * 16;
 		BlockPos blockpos = new BlockPos(x, 0, z);
 		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
-		//if (biomegenbase.theBiomeDecorator. != null) {
-		//	Chunk chunk = worldObj.getChunkFromChunkCoords(chX, chZ);
-		//	chunk.setTerrainPopulated(false);
-		//	return;
-		//}
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(x, 0, z));
 	}
 
@@ -179,11 +174,6 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
 	}
-
-	//@Override
-	//public Chunk provideChunk(BlockPos blockPosIn) {
-	//	return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
-	//}
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {

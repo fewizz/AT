@@ -34,7 +34,7 @@ public class SkyRenderer extends IRenderHandler {
 		VertexBuffer wr = tes.getBuffer();
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
-		int r = (int) (fb.get(Rend.RED) * 255);
+		int r = (int) ((fb.get(Rend.RED) / 1.3F) * 255);
 		int g = (int) (fb.get(Rend.GREEN) * 255);
 		int b = (int) (fb.get(Rend.BLUE) * 255);
 		

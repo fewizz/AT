@@ -63,7 +63,8 @@ public class ATGenLayerBiome extends GenLayer {
 		for (int i = 0; i < areaHeight; ++i) {
 			for (int j = 0; j < areaWidth; ++j) {
 				this.initChunkSeed((long) (j + areaX), (long) (i + areaY));
-				arrayToFill[j + i * areaWidth] = ATBiomes.bubble.biomeID;
+				//arrayToFill[j + i * areaWidth] = ATBiomes.bubble.biomeID;
+				arrayToFill[j + i * areaWidth] = ATBiomes.greenHill.biomeID;
 			}
 
 		}

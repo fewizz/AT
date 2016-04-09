@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -90,7 +91,7 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
 		return AABB;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
 		return NULL_AABB;
@@ -114,6 +115,11 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
 		return this.getDefaultState();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 
 }

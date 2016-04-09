@@ -36,8 +36,7 @@ public class AT {
 			clientSide = "fewizz.at.proxy.ClientProxy",
 			serverSide = "fewizz.at.proxy.Proxy")
 	public static Proxy proxy;
-	
-	public static CreativeTabs tab = new ATCreativeTab();
+	public static final CreativeTabs tab = new ATCreativeTab();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
