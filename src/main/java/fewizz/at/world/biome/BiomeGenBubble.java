@@ -19,11 +19,11 @@ import net.minecraftforge.common.config.Configuration;
 public class BiomeGenBubble extends ATBiome {
 
 	public BiomeGenBubble() {
-		super("ATBubble", 0.3F, 0.35F);
+		super("ATBubble", 0.27F, 0.4F);
 
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
-		this.theBiomeDecorator.grassPerChunk = 256;
+		this.theBiomeDecorator.grassPerChunk = 198;
 	}
 
 	@Override

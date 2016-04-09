@@ -40,7 +40,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 	private final SimplexNoise noiseMount = new SimplexNoise();
 	private Random rand;
 	private World worldObj;
-	private int waterLevel = 50;
+	private int waterLevel = 48;
 	private int strength = 24;
 	private int offset = 5;
 	private int length = 16 + (offset * 2);
@@ -135,6 +135,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 		chunk.setBiomeArray(biomeIds);
 		chunk.generateSkylightMap();
+		
 		return chunk;
 	}
 

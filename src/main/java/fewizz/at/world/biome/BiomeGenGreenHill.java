@@ -17,7 +17,7 @@ public class BiomeGenGreenHill extends ATBiome {
 	public static SimplexNoise noise = new SimplexNoise();
 
 	public BiomeGenGreenHill() {
-		super("ATGreenHill");
+		super("ATGreenHill", 0.3f, 0.4f);
 		
 		this.fillerBlock = Blocks.dirt.getDefaultState();
 		this.topBlock = Blocks.grass.getDefaultState();
@@ -54,7 +54,7 @@ public class BiomeGenGreenHill extends ATBiome {
 		/** Hilling **/
 		IBlockState[] states = new IBlockState[256];
 
-		int offset = ((int) ((((float) noise.noise((float)xCoord / 64f, (float)zCoord / 64f) + 1) / 2f) * 5)) * 5;
+		int offset = ((int) ((((float) noise.noise((float)xCoord / 64f, (float)zCoord / 64f) + 1) / 2f) * 6)) * 3;
 
 		for (int y = 0; y < 256; y++) {
 			states[y] = chunkPrimerIn.getBlockState(x, y, z);
@@ -62,7 +62,11 @@ public class BiomeGenGreenHill extends ATBiome {
 
 		for (int y = 0; y < 256; y++) {
 			if (y + offset < 256) {
-				chunkPrimerIn.setBlockState(x, y + offset, z, states[y]);
+				IBlockState state = states[y];
+				if(state.getBlock() == Blocks.water) {
+					state = Blocks.flowing_water.getDefaultState();
+				}
+				chunkPrimerIn.setBlockState(x, y + offset, z, state);
 			}
 		}
 

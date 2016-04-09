@@ -5,6 +5,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+/** WARNING! Copypaste! **/
 public class ATGenLayerRiver extends GenLayer {
 	public ATGenLayerRiver(long seed, GenLayer parent) {
 		super(seed);

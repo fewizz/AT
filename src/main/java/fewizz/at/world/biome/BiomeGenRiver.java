@@ -13,7 +13,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 public class BiomeGenRiver extends ATBiome {
 
 	public BiomeGenRiver() {
-		super("ATRiver", -0.5F, 0.2F);
+		super("ATRiver", -0.45F, 0.2F);
 
 		this.topBlock = Blocks.sand.getDefaultState();
 		this.fillerBlock = Blocks.sand.getDefaultState();

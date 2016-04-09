@@ -22,6 +22,7 @@ import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 
+/** WARNING! Copypaste! **/
 public abstract class ATGenLayer extends GenLayer {
 
 	public ATGenLayer(long seed) {

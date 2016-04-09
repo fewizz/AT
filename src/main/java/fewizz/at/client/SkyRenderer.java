@@ -34,9 +34,9 @@ public class SkyRenderer extends IRenderHandler {
 		VertexBuffer wr = tes.getBuffer();
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
-		int r = (int) ((fb.get(Rend.RED) / 1.3F) * 255);
-		int g = (int) (fb.get(Rend.GREEN) * 255);
-		int b = (int) (fb.get(Rend.BLUE) * 255);
+		int r = (int) ((fb.get(Rend.RED) * 0.1F) * 255);
+		int g = (int) ((fb.get(Rend.GREEN) * 0.5F) * 255);
+		int b = (int) ((fb.get(Rend.BLUE) * 2F) * 255);
 		
 		GlStateManager.color(1, 1, 1);
 		GlStateManager.disableCull();
@@ -100,15 +100,15 @@ public class SkyRenderer extends IRenderHandler {
 			float cos1 = MathHelper.cos((float) Math.toRadians(angle)) * distance;
 			float cos2 = MathHelper.cos((float) Math.toRadians(angle + 30)) * distance;
 			
-			wr.pos(sin1, -10, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
-			wr.pos(sin2, -10, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
-			wr.pos(sin2, distance, cos2).color((g + b) / 3, g, b * 2, 0).endVertex();
-			wr.pos(sin1, distance, cos1).color((g + b) / 3, g, b * 2, 0).endVertex();
+			wr.pos(sin1, -10, cos1).color(r, g, b, 255).endVertex();
+			wr.pos(sin2, -10, cos2).color(r, g, b, 255).endVertex();
+			wr.pos(sin2, distance, cos2).color(r, g, b, 0).endVertex();
+			wr.pos(sin1, distance, cos1).color(r, g, b, 0).endVertex();
 			
-			wr.pos(sin1, -200, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
-			wr.pos(sin2, -200, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
-			wr.pos(sin2, -10, cos2).color((g + b) / 3, g, b * 2, 255).endVertex();
-			wr.pos(sin1, -10, cos1).color((g + b) / 3, g, b * 2, 255).endVertex();
+			wr.pos(sin1, -200, cos1).color(r, g, b, 255).endVertex();
+			wr.pos(sin2, -200, cos2).color(r, g, b, 255).endVertex();
+			wr.pos(sin2, -10, cos2).color(r, g, b, 255).endVertex();
+			wr.pos(sin1, -10, cos1).color(r, g, b, 255).endVertex();
 		}
 		tes.draw();
 		/*****************************/

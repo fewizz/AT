@@ -18,6 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+/** WARNING! Copypaste! **/
 public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	int leafType = 0;
 	Random rand;
