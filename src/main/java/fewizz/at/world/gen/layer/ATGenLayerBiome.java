@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 
 import fewizz.at.init.ATBiomes;
 import net.minecraft.init.Biomes;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderSettings;
@@ -19,7 +20,7 @@ import net.minecraftforge.common.BiomeManager;
 
 /** WARNING! Copypaste! **/
 public class ATGenLayerBiome extends GenLayer {
-	
+	public static final int Y = 3840;
 	private List<BiomeManager.BiomeEntry>[] biomes = new ArrayList[BiomeManager.BiomeType.values().length];
 	private final ChunkProviderSettings chunkProviderSettings;
 
@@ -39,22 +40,22 @@ public class ATGenLayerBiome extends GenLayer {
 
 		int desertIdx = BiomeManager.BiomeType.DESERT.ordinal();
 
-		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.desert, 30));
-		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.savanna, 20));
-		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.plains, 10));
+		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.DESERT, 30));
+		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.SAVANNA, 20));
+		biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.PLAINS, 10));
 
 		if (worldType == WorldType.DEFAULT_1_1) {
 			biomes[desertIdx].clear();
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.desert, 10));
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.forest, 10));
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.extremeHills, 10));
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.swampland, 10));
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.plains, 10));
-			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.taiga, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.DESERT, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.FOREST, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.EXTREME_HILLS, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.SWAMPLAND, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.PLAINS, 10));
+			biomes[desertIdx].add(new BiomeManager.BiomeEntry(Biomes.TAIGA, 10));
 			this.chunkProviderSettings = null;
 		}
 		else if (worldType == WorldType.CUSTOMIZED) {
-			this.chunkProviderSettings = ChunkProviderSettings.Factory.jsonToFactory(settings).func_177864_b();
+			this.chunkProviderSettings = ChunkProviderSettings.Factory.jsonToFactory(settings).build();
 		}
 		else {
 			this.chunkProviderSettings = null;
@@ -70,11 +71,14 @@ public class ATGenLayerBiome extends GenLayer {
 			for (int x = 0; x < areaWidth; ++x) {
 				this.initChunkSeed((long) (x + areaX), (long) (z + areaY));
 				int k = parent[x + z * areaWidth];
+				//int l = (k & 0xf00) >> 8;
+				//System.out.println(k);
+				//k = k & -3841;
 				if(k < 2) {
-					arrayToFill[x + z * areaWidth] = ATBiomes.bubble.biomeID;
+					arrayToFill[x + z * areaWidth] = ATBiomes.greenHill.biomeID;
 				}
 				else {
-					arrayToFill[x + z * areaWidth] = ATBiomes.greenHill.biomeID;
+					arrayToFill[x + z * areaWidth] = ATBiomes.bubble.biomeID;
 				}
 			}
 
@@ -86,8 +90,8 @@ public class ATGenLayerBiome extends GenLayer {
 
 	protected BiomeManager.BiomeEntry getWeightedBiomeEntry(BiomeManager.BiomeType type) {
 		List<BiomeManager.BiomeEntry> biomeList = biomes[type.ordinal()];
-		int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
+		int totalWeight = WeightedRandom.getTotalWeight(biomeList);
 		int weight = BiomeManager.isTypeListModded(type) ? nextInt(totalWeight) : nextInt(totalWeight / 10) * 10;
-		return (BiomeManager.BiomeEntry) net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+		return (BiomeManager.BiomeEntry) WeightedRandom.getRandomItem(biomeList, weight);
 	}
 }

@@ -30,12 +30,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = AT.MODID, version = AT.VERSION)
 public class AT {
 	public static final String MODID = "at";
-	public static final String VERSION = "0.0.9";
+	public static final String VERSION = "0.1.0";
 	
 	@SidedProxy(
 			clientSide = "fewizz.at.proxy.ClientProxy",
 			serverSide = "fewizz.at.proxy.Proxy")
 	public static Proxy proxy;
+	
 	public static final CreativeTabs tab = new ATCreativeTab();
 
 	@EventHandler

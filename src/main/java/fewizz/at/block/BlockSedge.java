@@ -41,8 +41,8 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 	}
 
 	public BlockSedge() {
-		super(Material.plants);
-		this.setStepSound(SoundType.PLANT);
+		super(Material.PLANTS);
+		this.setSoundType(SoundType.PLANT);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, Integer.valueOf(1)));
 		this.setUnlocalizedName(getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));
@@ -71,11 +71,11 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 		IBlockState botState = worldIn.getBlockState(posBot);
 		IBlockState topState = worldIn.getBlockState(posTop);
 
-		if (botState.getBlock().getMaterial(botState) == Material.air) {
+		if (botState.getBlock().getMaterial(botState) == Material.AIR) {
 			worldIn.destroyBlock(pos, true);
 		}
 
-		if (topState.getBlock().getMaterial(topState) == Material.air) {
+		if (topState.getBlock().getMaterial(topState) == Material.AIR) {
 			if (worldIn.getBlockState(pos).getBlock() == ATBlocks.sedge && ATBlocks.sedge.getMetaFromState(worldIn.getBlockState(pos)) != 2) {
 				worldIn.destroyBlock(pos, true);
 			}

@@ -16,10 +16,10 @@ public class ATWorldProvider extends WorldProvider {
 	SkyRenderer sr;
 	CloudRenderer cr;
 	WeatherRenderer wr;
-
+	
 	@Override
-	protected void registerWorldChunkManager() {
-		this.worldChunkMgr = new ATWorldChunkManager(worldObj);
+	protected void createBiomeProvider() {
+		this.biomeProvider = new ATWorldChunkManager(worldObj);
 	}
 
 	@Override

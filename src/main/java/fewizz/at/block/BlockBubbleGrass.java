@@ -29,9 +29,9 @@ public class BlockBubbleGrass extends Block implements IHasName {
 	}
 
 	public BlockBubbleGrass() {
-		super(Material.grass);
+		super(Material.GRASS);
 		this.setCreativeTab(AT.tab);
-		this.setStepSound(SoundType.PLANT);
+		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.5F);
 		setUnlocalizedName(getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));

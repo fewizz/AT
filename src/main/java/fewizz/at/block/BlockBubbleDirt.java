@@ -24,9 +24,9 @@ public class BlockBubbleDirt extends Block implements IHasName {
 	}
 	
 	public BlockBubbleDirt() {
-		super(Material.cloth);
+		super(Material.CLOTH);
 		this.setCreativeTab(AT.tab);
-		this.setStepSound(SoundType.PLANT);
+		this.setSoundType(SoundType.PLANT);
 		this.setHardness(0.5F);
 		this.setUnlocalizedName(getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));

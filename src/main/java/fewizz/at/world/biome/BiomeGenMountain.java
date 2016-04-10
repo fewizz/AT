@@ -22,9 +22,9 @@ public class BiomeGenMountain extends ATBiome {
 
 	public BiomeGenMountain() {
 		super("ATMountain", -10F);
-		this.topBlock = Blocks.stone.getStateFromMeta(3); // Diorite
-		this.fillerBlock = Blocks.stone.getStateFromMeta(3);
-		this.snow = Blocks.snow.getDefaultState();
+		this.topBlock = Blocks.STONE.getStateFromMeta(3); // Diorite
+		this.fillerBlock = Blocks.STONE.getStateFromMeta(3);
+		this.snow = Blocks.SNOW.getDefaultState();
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class BiomeGenMountain extends ATBiome {
 		int newX = pos.getX() + rand.nextInt(16);
 		int newZ = pos.getZ() + rand.nextInt(16);
 		BlockPos dirtPos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)).down();
-		worldIn.setBlockState(dirtPos, Blocks.dirt.getDefaultState());
-		if (worldIn.getBlockState(dirtPos).getBlock() != Blocks.snow || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))) {
+		worldIn.setBlockState(dirtPos, Blocks.DIRT.getDefaultState());
+		if (worldIn.getBlockState(dirtPos).getBlock() != Blocks.SNOW || !new WorldGenTaiga2(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)))) {
 			worldIn.setBlockToAir(dirtPos);
 		}
 	}
@@ -57,19 +57,19 @@ public class BiomeGenMountain extends ATBiome {
 
 		for (int height = 255; height >= 0; --height) {
 			if (height <= rand.nextInt(5)) {
-				chunkPrimerIn.setBlockState(x, height, z, Blocks.bedrock.getDefaultState());
+				chunkPrimerIn.setBlockState(x, height, z, Blocks.BEDROCK.getDefaultState());
 			}
 			else {
 				IBlockState iblockstate2 = chunkPrimerIn.getBlockState(x, height, z);
 
-				if (iblockstate2.getBlock() == Blocks.air) {
+				if (iblockstate2.getBlock() == Blocks.AIR) {
 					j = -1;
 				}
-				else if (iblockstate2.getBlock() == Blocks.stone) {
+				else if (iblockstate2.getBlock() == Blocks.STONE) {
 					if (j == -1) {
 						if (k <= 0) {
 							top = null;
-							filler = Blocks.stone.getDefaultState();
+							filler = Blocks.STONE.getDefaultState();
 						}
 						else if (height >= seaLevel - 4 && height <= seaLevel + 1) {
 							top = this.topBlock;
@@ -88,8 +88,8 @@ public class BiomeGenMountain extends ATBiome {
 						}
 						else if (height < seaLevel - 12 - k) {
 							top = null;
-							filler = Blocks.stone.getDefaultState();
-							chunkPrimerIn.setBlockState(x, height, z, Blocks.gravel.getDefaultState());
+							filler = Blocks.STONE.getDefaultState();
+							chunkPrimerIn.setBlockState(x, height, z, Blocks.GRAVEL.getDefaultState());
 						}
 						else {
 							chunkPrimerIn.setBlockState(x, height, z, filler);
@@ -99,9 +99,9 @@ public class BiomeGenMountain extends ATBiome {
 						--j;
 						chunkPrimerIn.setBlockState(x, height, z, filler);
 
-						if (j == 0 && filler.getBlock() == Blocks.sand) {
+						if (j == 0 && filler.getBlock() == Blocks.SAND) {
 							j = rand.nextInt(4) + Math.max(0, height - 63);
-							filler = filler.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
+							filler = filler.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.RED_SANDSTONE.getDefaultState() : Blocks.SANDSTONE.getDefaultState();
 						}
 					}
 				}

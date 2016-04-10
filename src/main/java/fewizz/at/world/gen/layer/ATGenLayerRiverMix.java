@@ -5,7 +5,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-/** WARNING! Copypaste! **/
 public class ATGenLayerRiverMix extends GenLayer {
 	private GenLayer biomeLayer;
 	private GenLayer riverLayer;
@@ -30,7 +29,14 @@ public class ATGenLayerRiverMix extends GenLayer {
 		for (int i = 0; i < areaWidth * areaHeight; ++i) {
 
 			if (riverIDs[i] == ATBiomes.river.biomeID) {
-				toReturn[i] = riverIDs[i];
+				
+				if (biomeIDs[i] == ATBiomes.greenHill.biomeID) {
+					toReturn[i] = ATBiomes.greenHillRiver.biomeID;
+				}
+				else {
+					toReturn[i] = riverIDs[i];
+				}
+				
 			}
 			else {
 				toReturn[i] = biomeIDs[i];

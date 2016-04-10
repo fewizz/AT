@@ -53,7 +53,7 @@ public abstract class ATGenLayer extends GenLayer {
 		int j = i;
 
 		if (worldType == WorldType.CUSTOMIZED && worldSettings.length() > 0) {
-			chunkprovidersettings = ChunkProviderSettings.Factory.jsonToFactory(worldSettings).func_177864_b();
+			chunkprovidersettings = ChunkProviderSettings.Factory.jsonToFactory(worldSettings).build();
 			i = chunkprovidersettings.biomeSize;
 			j = chunkprovidersettings.riverSize;
 		}

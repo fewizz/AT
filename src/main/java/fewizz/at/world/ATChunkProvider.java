@@ -36,8 +36,8 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 
 public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
-	private final SimplexNoise noise = new SimplexNoise();
-	private final SimplexNoise noiseMount = new SimplexNoise();
+	private static final SimplexNoise noise = new SimplexNoise();
+	private static final SimplexNoise noiseMount = new SimplexNoise();
 	private Random rand;
 	private World worldObj;
 	private int waterLevel = 48;
@@ -121,10 +121,10 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 
 				for (int chY = 0; chY < 256; chY++) {
 					if (chY < height) {
-						chunkprimer.setBlockState(chX, chY, chZ, Blocks.stone.getDefaultState());
+						chunkprimer.setBlockState(chX, chY, chZ, Blocks.STONE.getDefaultState());
 					}
 					else if (chY <= waterLevel) {
-						chunkprimer.setBlockState(chX, chY, chZ, Blocks.water.getDefaultState());
+						chunkprimer.setBlockState(chX, chY, chZ, Blocks.WATER.getDefaultState());
 					}
 				}
 

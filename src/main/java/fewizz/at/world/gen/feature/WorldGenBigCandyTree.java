@@ -208,7 +208,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 	void generateTrunk() {
 		BlockPos blockpos = this.basePos;
 		BlockPos blockpos1 = this.basePos.up(this.height);
-		Block block = Blocks.log;
+		Block block = Blocks.LOG;
 		this.genTrunk(blockpos, blockpos1, block);
 	}
 
@@ -221,7 +221,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
 
 			if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
-				this.genTrunk(blockpos, worldgenbigtree$foliagecoordinates, Blocks.log);
+				this.genTrunk(blockpos, worldgenbigtree$foliagecoordinates, Blocks.LOG);
 			}
 		}
 	}
@@ -290,7 +290,7 @@ public class WorldGenBigCandyTree extends WorldGenAbstractTree {
 			return true;
 		}
 
-		boolean isSoil = state.getBlock().canSustainPlant(state, this.world, down, EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
+		boolean isSoil = state.getBlock().canSustainPlant(state, this.world, down, EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.SAPLING));
 
 		if (!isSoil) {
 			return false;

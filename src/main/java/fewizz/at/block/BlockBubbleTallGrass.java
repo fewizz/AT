@@ -32,7 +32,7 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 	
 	public BlockBubbleTallGrass() {
 		super();
-		this.setStepSound(SoundType.PLANT);
+		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));
 		GameRegistry.register(new ItemBlock(this), new ResourceLocation("at", getName()));
@@ -40,7 +40,7 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		return Blocks.tallgrass.getDrops(world, pos, state, fortune);
+		return Blocks.TALLGRASS.getDrops(world, pos, state, fortune);
 	}
 
 	@Override

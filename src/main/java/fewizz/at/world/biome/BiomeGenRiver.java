@@ -15,8 +15,8 @@ public class BiomeGenRiver extends ATBiome {
 	public BiomeGenRiver() {
 		super("ATRiver", -0.45F, 0.2F);
 
-		this.topBlock = Blocks.sand.getDefaultState();
-		this.fillerBlock = Blocks.sand.getDefaultState();
+		this.topBlock = Blocks.SAND.getDefaultState();
+		this.fillerBlock = Blocks.SAND.getDefaultState();
 	}
 
 	@Override
@@ -30,10 +30,10 @@ public class BiomeGenRiver extends ATBiome {
 		IBlockState statePlusTwo = chunkPrimerIn.getBlockState(x, worldIn.getSeaLevel() + 2, z);
 		IBlockState state = chunkPrimerIn.getBlockState(x, worldIn.getSeaLevel(), z);
 
-		if (statePlusOne.getBlock().getMaterial(statePlusOne) == Material.air && state.getBlock().getMaterial(state) != Material.water) {
+		if (statePlusOne.getBlock().getMaterial(statePlusOne) == Material.AIR && state.getBlock().getMaterial(state) != Material.WATER) {
 			y = worldIn.getSeaLevel();
 		}
-		else if (statePlusTwo.getBlock().getMaterial(statePlusTwo) == Material.air && state.getBlock().getMaterial(state) != Material.water) {
+		else if (statePlusTwo.getBlock().getMaterial(statePlusTwo) == Material.AIR && state.getBlock().getMaterial(state) != Material.WATER) {
 			y = worldIn.getSeaLevel() + 1;
 		}
 

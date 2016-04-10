@@ -41,7 +41,7 @@ public class BlockCandyLeaves extends BlockLeaves implements IHasName {
 
 	public BlockCandyLeaves() {
 		super();
-		this.setStepSound(SoundType.PLANT);
+		this.setSoundType(SoundType.PLANT);
 		this.setCreativeTab(AT.tab);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 1));
 		this.leavesFancy = true;
