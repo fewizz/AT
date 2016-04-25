@@ -18,9 +18,7 @@ import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.BiomeManager;
 
-/** WARNING! Copypaste! **/
 public class ATGenLayerBiome extends GenLayer {
-	public static final int Y = 3840;
 	private List<BiomeManager.BiomeEntry>[] biomes = new ArrayList[BiomeManager.BiomeType.values().length];
 	private final ChunkProviderSettings chunkProviderSettings;
 

@@ -17,9 +17,9 @@ group= "com.yourname.modid"
 archivesBaseName = "modid"
 
 minecraft {
-    version = "1.9-12.16.0.1863-1.9"
+    version = "1.9-12.16.0.1865-1.9"
     runDir = "run"
-    mappings = "snapshot_20160409"
+    mappings = "snapshot_20160424"
 }
 
 dependencies {

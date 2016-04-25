@@ -7,6 +7,7 @@ import fewizz.at.util.ATConfiguration;
 import fewizz.at.util.IHasName;
 import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import fewizz.at.world.gen.feature.WorldGenBubbleTallGrass;
+import fewizz.at.world.gen.feature.WorldGenCandyTree;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +32,8 @@ public class BiomeGenBubble extends ATBiome {
 		super.decorate(worldIn, rand, pos);
 		int newX = pos.getX() + rand.nextInt(16);
 		int newZ = pos.getZ() + rand.nextInt(16);
-		new WorldGenBigCandyTree(rand.nextInt(4)).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
+		//new WorldGenBigCandyTree(rand.nextInt(4)).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
+		new WorldGenCandyTree(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
 	}
 
 	@Override

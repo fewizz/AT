@@ -89,12 +89,12 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
-		return AABB;
+		return NULL_AABB;
 	}
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
-		return NULL_AABB;
+		return AABB;
 	}
 
 	@Override
