@@ -36,8 +36,8 @@ import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 
 public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
-	private static final SimplexNoise noise = new SimplexNoise();
-	private static final SimplexNoise noiseMount = new SimplexNoise();
+	private static final SimplexNoise NOISE = new SimplexNoise();
+	public static final SimplexNoise MOUNT_NOISE = new SimplexNoise();
 	private Random rand;
 	private World worldObj;
 	private int waterLevel = 48;
@@ -81,13 +81,13 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 						float atMountAmplitude = ((ATBiome) biome).getMountainAmplitude();
 						float atMountOffset = ((ATBiome) biome).getMountainOffset();
 
-						noiseMountValue = (float) ((noiseMount.noise(((x << 4) + chX - offset) * atMountFrequency, ((z << 4) + chZ - offset) * atMountFrequency) + atMountOffset) * atMountAmplitude);
-						noiseMountValue += (float) (noiseMount.noise(((x << 4) + chX - offset) * atMountFrequency * 8, ((z << 4) + chZ - offset) * atMountFrequency * 8) * atMountAmplitude / 4);
+						noiseMountValue = (float) ((MOUNT_NOISE.noise(((x << 4) + chX - offset) * atMountFrequency, ((z << 4) + chZ - offset) * atMountFrequency) + atMountOffset) * atMountAmplitude);
+						noiseMountValue += (float) (MOUNT_NOISE.noise(((x << 4) + chX - offset) * atMountFrequency * 8, ((z << 4) + chZ - offset) * atMountFrequency * 8) * atMountAmplitude / 4);
 					}
 				}
 				/*********************************/
 
-				float noiseValue = (float) noise.noise(((x << 4) + chX - offset) * tempFrequency, ((z << 4) + chZ - offset) * tempFrequency) * amplitude;
+				float noiseValue = (float) NOISE.noise(((x << 4) + chX - offset) * tempFrequency, ((z << 4) + chZ - offset) * tempFrequency) * amplitude;
 
 				if (noiseMountValue > noiseValue) {
 					noiseValue = noiseMountValue;
@@ -104,7 +104,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 			for (int chZ = 0; chZ < 16; chZ++) {
 				int index = (chX + offset) + ((chZ + offset) * length);
 				BiomeGenBase curBiome = biomes[index];
-				biomeIds[chX | (chZ << 4)] = (byte) BiomeGenBase.getIdForBiome(curBiome);// (byte) curBiome.;
+				biomeIds[chX | (chZ << 4)] = (byte) BiomeGenBase.getIdForBiome(curBiome);
 
 				/** Smoothing ********************/
 				float count = 0;

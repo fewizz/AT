@@ -18,6 +18,11 @@ public class BiomeGenRiver extends ATBiome {
 		this.topBlock = Blocks.SAND.getDefaultState();
 		this.fillerBlock = Blocks.SAND.getDefaultState();
 	}
+	
+	@Override
+	public int getBiomeColor() {
+		return 0x0000FF;
+	}
 
 	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int zGlobal, int xGlobal, double noiseVal) {

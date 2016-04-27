@@ -35,7 +35,7 @@ public class SkyRenderer extends IRenderHandler {
 		
 		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
 		int r = (int) ((fb.get(Rend.RED) * 0.1F) * 255);
-		int g = (int) ((fb.get(Rend.GREEN) * 0.5F) * 255);
+		int g = (int) ((fb.get(Rend.GREEN) * 0.1F) * 255);
 		int b = (int) ((fb.get(Rend.BLUE) * 2F) * 255);
 		
 		GlStateManager.color(1, 1, 1);

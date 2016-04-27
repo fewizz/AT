@@ -56,6 +56,10 @@ public class ATBiome extends BiomeGenBase implements IHasName{
 	public float getMountainOffset() {
 		return -0.2F;
 	}
+	
+	public int getBiomeColor() {
+		return 0xFFFFFF;
+	}
 
 	@Override
 	public String getName() {

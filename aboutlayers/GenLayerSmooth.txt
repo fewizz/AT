@@ -1,0 +1,75 @@
+/*******************************************************************************/
+int i = areaX - 1;
+int j = areaY - 1;
+int k = areaWidth + 2;
+int l = areaHeight + 2;
+int[] parent = this.parent.getInts(i, j, k, l);
+int[] toReturn = IntCache.getIntCache(areaWidth * areaHeight);
+
+for (int y = 0; y < areaHeight; ++y)
+{
+    for (int x = 0; x < areaWidth; ++x)
+    {
+        int left = parent[x + 0 + (y + 1) * k];
+        int right = parent[x + 2 + (y + 1) * k];
+        int bot = parent[x + 1 + (y + 0) * k];
+        int top = parent[x + 1 + (y + 2) * k];
+        int center = parent[x + 1 + (y + 1) * k];
+
+        if (left == right && bot == top)
+        {
+            this.initChunkSeed((long)(x + areaX), (long)(y + areaY));
+
+            if (this.nextInt(2) == 0)
+            {
+                center = left;
+            }
+            else
+            {
+                center = bot;
+            }
+        }
+        else
+        {
+            if (left == right)
+            {
+                center = left;
+            }
+
+            if (bot == top)
+            {
+                center = bot;
+            }
+        }
+
+        toReturn[x + y * areaWidth] = center;
+    }
+}
+
+return toReturn;
+/*******************************************************************************/
+
+int left = parent[x + 0 + (y + 1) * w];
+000
+x00
+000
+
+int right = parent[x + 2 + (y + 1) * w];
+000
+00x
+000
+
+int bot = parent[x + 1 + (y + 0) * w];
+000
+000
+0x0
+
+int top = parent[x + 1 + (y + 2) * w];
+0x0
+000
+000
+
+int center = parent[x + 1 + (y + 1) * w];
+000
+0x0
+000

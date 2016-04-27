@@ -20,12 +20,22 @@ public class ATBiomes {
 	public static ATBiome greenHillRiver;
 	public static ATBiome river;
 	
+	public static ArrayList<ATBiome> biomeIDs = new ArrayList<ATBiome>();
+	
 	public static void init() {
-		bubble = new BiomeGenBubble();
-		stoneMount = new BiomeGenMountain();
-		greenHill = new BiomeGenGreenHill();
+		bubble = register(new BiomeGenBubble());
+		greenHill = register(new BiomeGenGreenHill());
 		greenHillRiver = new BiomeGenGreenHillRiver();
+		stoneMount = new BiomeGenMountain();
 		river = new BiomeGenRiver();
+		
+		ArrayList list = new ArrayList<Integer>();
+		list.add(bubble);
+	}
+	
+	public static ATBiome register(ATBiome biome) {
+		biomeIDs.add(biome);
+		return biome;
 	}
 
 }

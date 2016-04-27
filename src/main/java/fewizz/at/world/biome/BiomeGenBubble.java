@@ -5,7 +5,6 @@ import java.util.Random;
 import fewizz.at.init.ATBlocks;
 import fewizz.at.util.ATConfiguration;
 import fewizz.at.util.IHasName;
-import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import fewizz.at.world.gen.feature.WorldGenBubbleTallGrass;
 import fewizz.at.world.gen.feature.WorldGenCandyTree;
 import net.minecraft.block.BlockTallGrass;
@@ -20,11 +19,21 @@ import net.minecraftforge.common.config.Configuration;
 public class BiomeGenBubble extends ATBiome {
 
 	public BiomeGenBubble() {
-		super("ATBubble", 0.27F, 0.4F);
+		super("ATBubble", 0.35F, 0.45F);
 
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
-		this.theBiomeDecorator.grassPerChunk = 198;
+		this.theBiomeDecorator.grassPerChunk = 32;
+	}
+	
+	@Override
+	public int getGrassColorAtPos(BlockPos pos) {
+		return 0x079400;
+	}
+	
+	@Override
+	public int getBiomeColor() {
+		return 0x5A009D;
 	}
 
 	@Override
@@ -32,13 +41,12 @@ public class BiomeGenBubble extends ATBiome {
 		super.decorate(worldIn, rand, pos);
 		int newX = pos.getX() + rand.nextInt(16);
 		int newZ = pos.getZ() + rand.nextInt(16);
-		//new WorldGenBigCandyTree(rand.nextInt(4)).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
-		new WorldGenCandyTree(false).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
+		new WorldGenCandyTree().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
 	}
 
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random rand) {
-		return new WorldGenBigCandyTree(rand.nextInt(4));
+		return new WorldGenCandyTree();
 	}
 
 	@Override

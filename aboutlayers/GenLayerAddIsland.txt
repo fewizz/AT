@@ -1,0 +1,87 @@
+/*******************************************************************************/
+int leftEdge = areaX - 1;
+int botEdge = areaY - 1;
+int width = areaWidth + 2;
+int height = areaHeight + 2;
+int[] parent = this.parent.getInts(leftEdge, botEdge, width, height);
+int[] toReturn = IntCache.getIntCache(areaWidth * areaHeight);
+
+for (int y = 0; y < areaHeight; ++y)
+{
+    for (int x = 0; x < areaWidth; ++x)
+    {
+        int leftBot = parent[x + 0 + (y + 0) * width]; // Left, bottom
+        int rightBot = parent[x + 2 + (y + 0) * width]; // Right, bottom
+        int leftTop = parent[x + 0 + (y + 2) * width]; // Left, top
+        int rightTop = parent[x + 2 + (y + 2) * width]; // Right, top
+        int center = parent[x + 1 + (y + 1) * width]; // Center
+        this.initChunkSeed((long)(x + areaX), (long)(y + areaY));
+
+        if (center != 0 || leftBot == 0 && rightBot == 0 && leftTop == 0 && rightTop == 0)
+        {
+            if (center > 0 && (leftBot == 0 || rightBot == 0 || leftTop == 0 || rightTop == 0))
+            {
+                if (this.nextInt(5) == 0)
+                {
+                    if (center == 4)
+                    {
+                        toReturn[x + y * areaWidth] = 4;
+                    }
+                    else
+                    {
+                        toReturn[x + y * areaWidth] = 0;
+                    }
+                }
+                else
+                {
+                    toReturn[x + y * areaWidth] = center;
+                }
+            }
+            else
+            {
+                toReturn[x + y * areaWidth] = center;
+            }
+        }
+        else
+        {
+            int chance = 1;
+            int i3 = 1;
+
+            if (leftBot != 0 && this.nextInt(chance++) == 0)
+            {
+                i3 = leftBot;
+            }
+
+            if (rightBot != 0 && this.nextInt(chance++) == 0)
+            {
+                i3 = rightBot;
+            }
+
+            if (leftTop != 0 && this.nextInt(chance++) == 0)
+            {
+                i3 = leftTop;
+            }
+
+            if (rightTop != 0 && this.nextInt(chance++) == 0)
+            {
+                i3 = rightTop;
+            }
+
+            if (this.nextInt(3) == 0)
+            {
+                toReturn[x + y * areaWidth] = i3;
+            }
+            else if (i3 == 4)
+            {
+                toReturn[x + y * areaWidth] = 4;
+            }
+            else
+            {
+                toReturn[x + y * areaWidth] = 0;
+            }
+        }
+    }
+}
+
+return toReturn;
+/*******************************************************************************/

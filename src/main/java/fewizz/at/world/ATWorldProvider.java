@@ -19,7 +19,7 @@ public class ATWorldProvider extends WorldProvider {
 	
 	@Override
 	protected void createBiomeProvider() {
-		this.biomeProvider = new ATWorldChunkManager(worldObj);
+		this.biomeProvider = new ATBiomeProvider(worldObj);
 	}
 
 	@Override

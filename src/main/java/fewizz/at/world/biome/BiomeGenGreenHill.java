@@ -3,6 +3,7 @@ package fewizz.at.world.biome;
 import java.util.Random;
 
 import fewizz.at.world.SimplexNoise;
+import fewizz.at.world.gen.feature.WorldGenCandyTree;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +22,7 @@ public class BiomeGenGreenHill extends ATBiome {
 		
 		this.fillerBlock = Blocks.DIRT.getDefaultState();
 		this.topBlock = Blocks.GRASS.getDefaultState();
-		this.theBiomeDecorator.grassPerChunk = 128;
+		this.theBiomeDecorator.grassPerChunk = 32;
 		this.theBiomeDecorator.treesPerChunk = 2;
 	}
 	
@@ -31,13 +32,18 @@ public class BiomeGenGreenHill extends ATBiome {
 	}
 	
 	@Override
+	public int getBiomeColor() {
+		return 0x00FF00;
+	}
+	
+	@Override
 	public float getFrequency() {
 		return 0.06F;
 	}
 	
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random rand) {
-		return new WorldGenBigTree(false);
+		return new WorldGenCandyTree(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState().withProperty(Blocks.LEAVES.CHECK_DECAY, false));
 	}
 
 	@Override

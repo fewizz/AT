@@ -5,7 +5,8 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import fewizz.at.world.gen.layer.ATGenLayer;
+import fewizz.at.world.gen.layer.ATGenLayerMain;
+import fewizz.at.world.gen.layer.ATGenLayerMain;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.init.Biomes;
@@ -18,27 +19,18 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
-public class ATWorldChunkManager extends BiomeProvider {
+public class ATBiomeProvider extends BiomeProvider {
 	private GenLayer genBiomes;
-	private GenLayer biomeIndexLayer;
 	private BiomeCache biomeCache;
-	private List<BiomeGenBase> biomesToSpawnIn;
-	private String generatorOptions;
 
-	public ATWorldChunkManager(World world) {
-		String options = world.getWorldInfo().getGeneratorOptions();
+	public ATBiomeProvider(World world) {
 		long seed = world.getSeed();
 		WorldType worldType = world.getWorldInfo().getTerrainType();
 		this.biomeCache = new BiomeCache(this);
-		this.generatorOptions = "";
-		this.biomesToSpawnIn = Lists.<BiomeGenBase> newArrayList();
-		this.biomesToSpawnIn.addAll(allowedBiomes);
-		this.generatorOptions = options;
-		GenLayer[] agenlayer = ATGenLayer.initializeAllBiomeGenerators(seed, worldType, options);
-		agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
-		this.genBiomes = agenlayer[0];
-		this.biomeIndexLayer = agenlayer[1];
+		this.genBiomes = ATGenLayerMain.initializeAllBiomeGenerators(seed);
 	}
 
 	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] biomes, int x, int z, int width, int height) {
@@ -81,7 +73,7 @@ public class ATWorldChunkManager extends BiomeProvider {
 			return listToReuse;
 		}
 		else {
-			int[] aint = this.biomeIndexLayer.getInts(x, z, width, length);
+			int[] aint = this.genBiomes.getInts(x, z, width, length);
 
 			for (int i = 0; i < width * length; ++i) {
 				listToReuse[i] = BiomeGenBase.getBiomeFromBiomeList(aint[i], Biomes.DEFAULT);
@@ -91,12 +83,12 @@ public class ATWorldChunkManager extends BiomeProvider {
 		}
 	}
 
-	public boolean areBiomesViable(int p_76940_1_, int p_76940_2_, int p_76940_3_, List<BiomeGenBase> p_76940_4_) {
+	public boolean areBiomesViable(int posX, int posZ, int radius, List<BiomeGenBase> list) {
 		IntCache.resetIntCache();
-		int i = p_76940_1_ - p_76940_3_ >> 2;
-		int j = p_76940_2_ - p_76940_3_ >> 2;
-		int k = p_76940_1_ + p_76940_3_ >> 2;
-		int l = p_76940_2_ + p_76940_3_ >> 2;
+		int i = posX - radius >> 2;
+		int j = posZ - radius >> 2;
+		int k = posX + radius >> 2;
+		int l = posZ + radius >> 2;
 		int i1 = k - i + 1;
 		int j1 = l - j + 1;
 		int[] aint = this.genBiomes.getInts(i, j, i1, j1);
@@ -105,7 +97,7 @@ public class ATWorldChunkManager extends BiomeProvider {
 			for (int k1 = 0; k1 < i1 * j1; ++k1) {
 				BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k1]);
 
-				if (!p_76940_4_.contains(biomegenbase)) {
+				if (!list.contains(biomegenbase)) {
 					return false;
 				}
 			}
@@ -115,10 +107,10 @@ public class ATWorldChunkManager extends BiomeProvider {
 			CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
 			CrashReportCategory crashreportcategory = crashreport.makeCategory("Layer");
 			crashreportcategory.addCrashSection("Layer", this.genBiomes.toString());
-			crashreportcategory.addCrashSection("x", Integer.valueOf(p_76940_1_));
-			crashreportcategory.addCrashSection("z", Integer.valueOf(p_76940_2_));
-			crashreportcategory.addCrashSection("radius", Integer.valueOf(p_76940_3_));
-			crashreportcategory.addCrashSection("allowed", p_76940_4_);
+			crashreportcategory.addCrashSection("x", Integer.valueOf(posX));
+			crashreportcategory.addCrashSection("z", Integer.valueOf(posZ));
+			crashreportcategory.addCrashSection("radius", Integer.valueOf(radius));
+			crashreportcategory.addCrashSection("allowed", list);
 			throw new ReportedException(crashreport);
 		}
 	}
@@ -150,8 +142,8 @@ public class ATWorldChunkManager extends BiomeProvider {
 	}
 
 	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
-		net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens event = new net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens(worldType, seed, original);
-		net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.post(event);
+		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
+		MinecraftForge.TERRAIN_GEN_BUS.post(event);
 		return event.getNewBiomeGens();
 	}
 

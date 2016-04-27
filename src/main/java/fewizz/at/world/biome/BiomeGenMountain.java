@@ -4,7 +4,6 @@ import java.util.Random;
 
 import fewizz.at.util.ATConfiguration;
 import fewizz.at.util.IHasName;
-import fewizz.at.world.gen.feature.WorldGenBigCandyTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;

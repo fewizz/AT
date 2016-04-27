@@ -1,0 +1,94 @@
+/*******************************************************************************/
+int ax = areaX >> 1;
+int ay = areaY >> 1;
+int w = (areaWidth >> 1) + 2;
+int h = (areaHeight >> 1) + 2;
+int[] parent = this.parent.getInts(ax, ay, w, h);
+int nw = w - 1 << 1;
+int nh = h - 1 << 1;
+int[] temp = IntCache.getIntCache(nw * nh);
+
+for (int y = 0; y < h - 1; ++y)
+{
+    int index = (y << 1) * nw;
+    int leftBot = parent[x + 0 + (y + 0) * w];
+	int leftTop = parent[x + 0 + (y + 1) * w];
+
+    for (int x = 0; x < w - 1; ++x)
+    {
+        this.initChunkSeed((long)(x + ax << 1), (long)(y + ay << 1));
+        int rightBot = parent[x + 1 + (y + 0) * w];
+        int rightTop = parent[x + 1 + (y + 1) * w];
+        temp[index] = leftBot;
+        temp[index++ + nw] = this.selectRandom(new int[] {leftBot, leftTop});
+        temp[index] = this.selectRandom(new int[] {leftBot, rightBot});
+        temp[index++ + nw] = this.selectModeOrRandom(leftBot, rightBot, leftTop, rightTop);
+        leftBot = rightBot;
+        leftTop = rightTop;
+    }
+}
+
+int[] toReturn = IntCache.getIntCache(areaWidth * areaHeight);
+
+for (int j3 = 0; j3 < areaHeight; ++j3)
+{
+    System.arraycopy(temp, (j3 + (areaY & 1)) * nw + (areaX & 1), toReturn, j3 * areaWidth, areaWidth);
+}
+
+return toReturn;
+/*******************************************************************************/
+
+areaX = 256
+areaY = 512
+areaWidth = 64
+areaHeight = 64
+x = 128
+y = 256
+w = (64 >> 1) + 2 = 34
+h = (64 >> 1) + 2 = 34
+nw = 34 - 1 << 1 = 33 < 1 = 66
+nw = 34 - 1 << 1 = 33 < 1 = 66
+
+// То есть мы будем брать зону в 2 раза меньше с предыдущего лейера, скалить до нужных размеров и гладить
+
+	Столько нужно:          Столько берём с парента:
+	
+		   16
+	xxxxxxxxxxxxxxxx
+	xxxxxxxxxxxxxxxx
+	xxxxxxxxxxxxxxxx			 10
+	xxxxxxxxxxxxxxxx		 llllllllll
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx	     lxxxxxxxxl
+16  xxxxxxxxxxxxxxxx ->  10  lxxxxxxxxl То есть в 2 раза меньше, плюс края.
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx		 lxxxxxxxxl
+	xxxxxxxxxxxxxxxx		 llllllllll
+	xxxxxxxxxxxxxxxx
+	xxxxxxxxxxxxxxxx
+	xxxxxxxxxxxxxxxx
+	
+	
+	aint2:
+	       18
+   llllllllllllllllll
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+18 lxxxxxxxxxxxxxxxxl  Столько же сколько и возвращать, плюс края.
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   lxxxxxxxxxxxxxxxxl
+   llllllllllllllllll
