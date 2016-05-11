@@ -2,6 +2,7 @@ package fewizz.at.client;
 
 import org.lwjgl.opengl.GL11;
 
+import fewizz.at.world.biome.ATBiome;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,12 +10,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.IRenderHandler;
 
 public class CloudRenderer extends IRenderHandler {
 	public static int cloudTickCounter = 0;
-	public final ResourceLocation locationCloudsPng = new ResourceLocation("textures/environment/clouds.png");
+	public static final ResourceLocation locationCloudsPng = new ResourceLocation("textures/environment/clouds.png");
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
@@ -28,9 +32,14 @@ public class CloudRenderer extends IRenderHandler {
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 
-		float r1 = 0.5F;
-		float g1 = 1F;
-		float b1 = 1F;
+		//BlockPos playerPos = new BlockPos(mc.thePlayer);
+		//BiomeGenBase biome = world.getBiomeGenForCoords(playerPos);
+
+		Vec3d cloudColor = world.getCloudColour(partialTicks);
+
+		float r1 = (float) cloudColor.xCoord;
+		float g1 = (float) cloudColor.yCoord;
+		float b1 = (float) cloudColor.zCoord;
 
 		float r2 = r1 * 0.9F;
 		float g2 = g1 * 0.9F;
@@ -46,7 +55,7 @@ public class CloudRenderer extends IRenderHandler {
 
 		GlStateManager.scale(12.0F, 1.0F, 12.0F);
 		GlStateManager.colorMask(true, true, true, true);
-		
+
 		float end = GL11.glGetFloat(GL11.GL_FOG_END);
 		GlStateManager.setFogEnd(end * 3F);
 
@@ -67,7 +76,7 @@ public class CloudRenderer extends IRenderHandler {
 
 			float f19 = (float) (posX - (double) MathHelper.floor_double(posX));
 			float f20 = (float) (posZ - (double) MathHelper.floor_double(posZ));
-			
+
 			for (int i1 = 0; i1 < 3; ++i1) {
 
 				for (int clX = -3; clX <= 4; ++clX) {
@@ -85,10 +94,10 @@ public class CloudRenderer extends IRenderHandler {
 						}
 
 						if (height <= 5.0F) {
-							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
-							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(0.8F, 1, 1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r1, g1, b1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 8.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 8.0F) * 0.00390625F + texV)).color(r1, g1, b1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 8.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 8.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r1, g1, b1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
+							worldrenderer.pos((double) (x + 0.0F), (double) (height + 6.0F - 9.765625E-4F), (double) (z + 0.0F)).tex((double) ((x1 + 0.0F) * 0.00390625F + texU), (double) ((z1 + 0.0F) * 0.00390625F + texV)).color(r1, g1, b1, 0.8F).normal(0.0F, 1.0F, 0.0F).endVertex();
 						}
 
 						if (clX > -1) {

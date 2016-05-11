@@ -37,7 +37,7 @@ public class ItemGeneratorTester extends Item implements IHasName {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (!worldIn.isRemote) {
-			new WorldGenCandyTree(false).generate(worldIn, rnd, new BlockPos(playerIn));
+			new WorldGenCandyTree().generate(worldIn, rnd, new BlockPos(playerIn));
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}

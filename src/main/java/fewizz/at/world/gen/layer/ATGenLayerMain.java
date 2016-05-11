@@ -50,7 +50,7 @@ public abstract class ATGenLayerMain extends GenLayer {
 		GenLayer riverZoom1 = GenLayerZoom.magnify(seed + 1, riverInit, 2);
 		GenLayer riverZoom2 = GenLayerZoom.magnify(seed + 2, riverZoom1, 2);
 		ATGenLayerRiver river = new ATGenLayerRiver(seed, riverZoom2);
-		GenLayer riverZoom3 = GenLayerZoom.magnify(seed + 3, river, 2);
+		GenLayer riverZoom3 = GenLayerZoom.magnify(seed + 3, river, 3);
 		GenLayerSmooth riverSmmoth1 = new GenLayerSmooth(seed, riverZoom3);
 
 		ATGenLayerRiverMix mix = new ATGenLayerRiverMix(seed, smooth3, riverSmmoth1);

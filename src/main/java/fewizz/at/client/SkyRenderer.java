@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.opengl.GL11;
 
+import fewizz.at.world.biome.ATBiome;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GLAllocation;
@@ -12,7 +13,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.IRenderHandler;
 
 import static fewizz.at.client.Rend.*;
@@ -24,7 +28,6 @@ public class SkyRenderer extends IRenderHandler {
 	float x = 1F / 4F;
 	float y = 1F / 3F;
 	float distance = 0;
-	FloatBuffer fb = GLAllocation.createDirectFloatBuffer(16);
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
@@ -33,10 +36,10 @@ public class SkyRenderer extends IRenderHandler {
 		GlStateManager.disableFog();
 		VertexBuffer wr = tes.getBuffer();
 		
-		GL11.glGetFloat(GL11.GL_FOG_COLOR, fb);
-		int r = (int) ((fb.get(Rend.RED) * 0.1F) * 255);
-		int g = (int) ((fb.get(Rend.GREEN) * 0.1F) * 255);
-		int b = (int) ((fb.get(Rend.BLUE) * 2F) * 255);
+		Vec3d color = world.getSkyColor(mc.thePlayer, partialTicks);
+		int r = (int) (color.xCoord * 255);
+		int g = (int) (color.yCoord * 255);;
+		int b = (int) (color.zCoord * 255);;
 		
 		GlStateManager.color(1, 1, 1);
 		GlStateManager.disableCull();
@@ -48,6 +51,7 @@ public class SkyRenderer extends IRenderHandler {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0, -40, 0);
 		GlStateManager.rotate(mc.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1, 0, 0);
+		GlStateManager.rotate(45, 0, 1, 0);
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
 		wr.pos(-distance, -distance, -distance).tex(0, 1 - y).endVertex();
@@ -91,7 +95,7 @@ public class SkyRenderer extends IRenderHandler {
 		GlStateManager.alphaFunc(GL11.GL_GREATER, 0);
 		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		/** "Something like Fog" *****/
+		/** "Something like a Fog" *****/
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 
 		for (float angle = 0; angle < 360; angle += 30) {
@@ -102,8 +106,8 @@ public class SkyRenderer extends IRenderHandler {
 			
 			wr.pos(sin1, -10, cos1).color(r, g, b, 255).endVertex();
 			wr.pos(sin2, -10, cos2).color(r, g, b, 255).endVertex();
-			wr.pos(sin2, distance, cos2).color(r, g, b, 0).endVertex();
-			wr.pos(sin1, distance, cos1).color(r, g, b, 0).endVertex();
+			wr.pos(sin2, distance * 1.2f, cos2).color(r, g, b, 0).endVertex();
+			wr.pos(sin1, distance * 1.2f, cos1).color(r, g, b, 0).endVertex();
 			
 			wr.pos(sin1, -200, cos1).color(r, g, b, 255).endVertex();
 			wr.pos(sin2, -200, cos2).color(r, g, b, 255).endVertex();

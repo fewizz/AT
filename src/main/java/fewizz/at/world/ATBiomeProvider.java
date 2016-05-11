@@ -147,9 +147,6 @@ public class ATBiomeProvider extends BiomeProvider {
 		return event.getNewBiomeGens();
 	}
 
-	/**
-	 * Calls the WorldChunkManager's biomeCache.cleanupCache()
-	 */
 	@Override
 	public void cleanupCache() {
 		this.biomeCache.cleanupCache();

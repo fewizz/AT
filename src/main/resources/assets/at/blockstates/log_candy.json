@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "at:log_candy" },
+        "axis=z":   { "model": "at:log_candy_side" },
+        "axis=x":   { "model": "at:log_candy_side", "y": 90 },
+        "axis=none": { "model": "at:bark_candy" }
+    }
+}

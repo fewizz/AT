@@ -24,6 +24,7 @@ public class BiomeGenBubble extends ATBiome {
 		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
 		this.topBlock = ATBlocks.bubbleGrass.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 32;
+		this.theBiomeDecorator.treesPerChunk = 2;
 	}
 	
 	@Override
@@ -34,14 +35,6 @@ public class BiomeGenBubble extends ATBiome {
 	@Override
 	public int getBiomeColor() {
 		return 0x5A009D;
-	}
-
-	@Override
-	public void decorate(World worldIn, Random rand, BlockPos pos) {
-		super.decorate(worldIn, rand, pos);
-		int newX = pos.getX() + rand.nextInt(16);
-		int newZ = pos.getZ() + rand.nextInt(16);
-		new WorldGenCandyTree().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(new BlockPos(newX, 0, newZ)));
 	}
 
 	@Override

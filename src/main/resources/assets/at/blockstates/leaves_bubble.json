@@ -1,0 +1,8 @@
+{
+    "variants": {
+		"check_decay=false,decayable=false": {"model": "at:leaves_bubble"},
+		"check_decay=true,decayable=false": {"model": "at:leaves_bubble"},
+		"check_decay=true,decayable=true": {"model": "at:leaves_bubble"},
+		"check_decay=false,decayable=true": {"model": "at:leaves_bubble"}
+    }
+}

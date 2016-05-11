@@ -1,6 +1,6 @@
 {
     "parent": "block/leaves",
     "textures": {
-        "all": "at:blocks/leaves_candy_4"
+        "all": "at:blocks/leaves_bubble"
     }
 }

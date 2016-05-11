@@ -2,6 +2,7 @@ package fewizz.at.world.gen.feature;
 
 import java.util.Random;
 
+import fewizz.at.block.BlockCandyLeaves;
 import fewizz.at.init.ATBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,12 +21,12 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 	public IBlockState log;
 	public IBlockState leaves;
 
-	public static final int TREE_HEIGHT = 16;
-	public static final int NORMAL_BRANCH_RADIUS = 4;
-	public static final int BRANCH_RADIUS_VARIATION = 3;
-	public static final int LEAVES_OFFSET = 5;
-	public static final float BRANCH_WIDTH_SCALE = 1.4F;
-	public static final float BRANCH_HEIGHT_SCALE = 0.8F;
+	public static int TREE_HEIGHT = 16;
+	public static int NORMAL_BRANCH_RADIUS = 4;
+	public static int BRANCH_RADIUS_VARIATION = 3;
+	public static int LEAVES_OFFSET = 5;
+	public static float BRANCH_WIDTH_SCALE = 1.4F;
+	public static float BRANCH_HEIGHT_SCALE = 0.8F;
 
 	public WorldGenCandyTree(IBlockState log, IBlockState leaves) {
 		this();
@@ -48,8 +49,10 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 			return false;
 		}
 
-		if (leaves == null)
-			leaves = ATBlocks.candyLeaves.getStateFromMeta(rnd.nextInt(4) << 2); // 4 variants
+		if (leaves == null) {
+			leaves = ATBlocks.candyLeaves.getStateFromMeta(rnd.nextInt(4)); // 4 variants
+			leaves = leaves.withProperty(BlockCandyLeaves.DECAYABLE, true).withProperty(BlockCandyLeaves.CHECK_DECAY, false);
+		}
 		if (log == null) {
 			log = Blocks.LOG.getDefaultState();
 		}
@@ -65,7 +68,7 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 		IBlockState state = this.world.getBlockState(down);
 		Block block = state.getBlock();
 
-		if (block == ATBlocks.bubbleTallGrass || block == ATBlocks.bubbleGrass || block == Blocks.DIRT || block == Blocks.GRASS) {
+		if (block == ATBlocks.bubbleTallGrass || block == ATBlocks.bubbleGrass || block == Blocks.DIRT || block == Blocks.GRASS || block == ATBlocks.candyGrass) {
 			return true;
 		}
 
@@ -79,7 +82,7 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 	}
 
 	public void generateBranches() {
-		for (int i = LEAVES_OFFSET; i < TREE_HEIGHT; i ++) {
+		for (int i = LEAVES_OFFSET; i < TREE_HEIGHT; i++) {
 			generateBranch(i);
 		}
 	}
@@ -106,7 +109,6 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 					if (hyp > radius) {
 						continue;
 					}
-
 
 					if (world.getBlockState(pos.add(offsetX + x, offsetY + y, offsetZ + z)).getMaterial() != Material.AIR) {
 						continue;

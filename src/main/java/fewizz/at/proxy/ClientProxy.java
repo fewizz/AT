@@ -21,18 +21,20 @@ public class ClientProxy extends Proxy {
 		/** Blocks **/
 		registerRender(ATBlocks.bubbleDirt);
 		registerRender(ATBlocks.bubbleGrass);
+		registerRender(ATBlocks.bubbleLeaves);
+		registerRender(ATBlocks.candyGrass);
 		registerRender(ATBlocks.candyLeaves, 0);
-		registerRender(ATBlocks.candyLeaves, 4);
-		registerRender(ATBlocks.candyLeaves, 8);
-		registerRender(ATBlocks.candyLeaves, 12);
-		
+		registerRender(ATBlocks.candyLeaves, 1);
+		registerRender(ATBlocks.candyLeaves, 2);
+		registerRender(ATBlocks.candyLeaves, 3);
+
 		/** Items **/
 		registerRender(ATItems.teleporter);
 	}
 
 	@Override
 	public void registerItemVariants() {
-		registerItemVariants(candyLeaves_0, candyLeaves_4, candyLeaves_8, candyLeaves_12);
+		registerItemVariants(candyLeaves0, candyLeaves1, candyLeaves2, candyLeaves3);
 	}
 
 	/** Without meta **/
@@ -69,12 +71,11 @@ public class ClientProxy extends Proxy {
 
 	/** Main Registrator **/
 	public void registerRender(Item item, String name, boolean hasMeta, int meta) {
-		if (hasMeta) {
+		if (hasMeta)
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation("at:" + name + "_" + meta, "inventory"));
-		}
-		else {
+		else
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation("at:" + name, "inventory"));
-		}
+
 	}
 
 	/** For items/blocks with meta **/

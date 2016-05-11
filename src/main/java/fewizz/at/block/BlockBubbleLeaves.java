@@ -21,6 +21,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -30,65 +31,47 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCandyLeaves extends BlockLeaves implements IHasName {
-
-	public static final PropertyInteger TYPE = PropertyInteger.create("type", 0, 3);
+public class BlockBubbleLeaves extends BlockLeaves implements IHasName {
 
 	@Override
 	public String getName() {
-		return "leaves_candy";
+		return "leaves_bubble";
 	}
 
-	public BlockCandyLeaves() {
+	public BlockBubbleLeaves() {
 		super();
+		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, Boolean.valueOf(true)).withProperty(CHECK_DECAY, Boolean.valueOf(true)));
 		this.setSoundType(SoundType.PLANT);
 		this.setCreativeTab(AT.tab);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 1).withProperty(DECAYABLE, true).withProperty(CHECK_DECAY, true));
 		this.leavesFancy = true;
 		this.setUnlocalizedName(getName());
 		GameRegistry.register(this, new ResourceLocation("at", getName()));
-		GameRegistry.register(new ItemBlockWithMeta(this), new ResourceLocation("at", getName()));
-		
-		ATItemStacks.candyLeaves0 = new ItemStack(this, 1, 0);
-		ATItemStacks.candyLeaves1 = new ItemStack(this, 1, 1);
-		ATItemStacks.candyLeaves2 = new ItemStack(this, 1, 2);
-		ATItemStacks.candyLeaves3 = new ItemStack(this, 1, 3);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void setGraphicsLevel(boolean fancy) {
-		this.leavesFancy = true;
+		GameRegistry.register(new ItemBlock(this), new ResourceLocation("at", getName()));
 	}
 
-	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { TYPE, DECAYABLE, CHECK_DECAY });
+		return new BlockStateContainer(this, new IProperty[] { DECAYABLE, CHECK_DECAY });
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		int type = state.getValue(TYPE);
 		int decayable = state.getValue(DECAYABLE) ? 1 : 0;
 		int checkDecay = state.getValue(CHECK_DECAY) ? 1 : 0;
 		
-		return (decayable << 3) | (checkDecay << 2) | type;
+		return (decayable << 1) | checkDecay;
 	}
-
+	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		boolean decayable = (meta & 0b1000) == 1;
-		boolean checkDecay = (meta & 0b0100) == 1;
-		int type = meta & 0b11;
+		boolean decayable = (meta & 0b10) == 1;
+		boolean checkDecay = (meta & 0b1) == 1;
 		
-		return getDefaultState().withProperty(TYPE, type).withProperty(DECAYABLE, decayable).withProperty(CHECK_DECAY, checkDecay);
+		return getDefaultState().withProperty(DECAYABLE, decayable).withProperty(CHECK_DECAY, checkDecay);
 	}
 
-	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-		list.add(new ItemStack(this, 1, 0));
-		list.add(new ItemStack(this, 1, 1));
-		list.add(new ItemStack(this, 1, 2));
-		list.add(new ItemStack(this, 1, 3));
+	@SideOnly(Side.CLIENT)
+	public void setGraphicsLevel(boolean fancy) {
+		this.leavesFancy = true;
 	}
 
 	@Override

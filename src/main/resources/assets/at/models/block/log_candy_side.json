@@ -1,0 +1,7 @@
+{
+    "parent": "block/column_side",
+    "textures": {
+        "end": "at:blocks/log_candy_top",
+        "side": "at:blocks/log_candy"
+    }
+}

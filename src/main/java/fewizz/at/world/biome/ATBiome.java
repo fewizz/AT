@@ -60,6 +60,14 @@ public class ATBiome extends BiomeGenBase implements IHasName{
 	public int getBiomeColor() {
 		return 0xFFFFFF;
 	}
+	
+	public int getSkyColor() {
+		return 0x0040FF;
+	}
+	
+	public int getCloudColor() {
+		return 0x00FFFF;
+	}
 
 	@Override
 	public String getName() {

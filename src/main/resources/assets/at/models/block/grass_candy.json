@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "at:blocks/dirt_bubble",
+        "top": "at:blocks/grass_candy",
+        "side": "at:blocks/grass_candy"
+    }
+}

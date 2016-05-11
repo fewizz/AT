@@ -1,8 +1,23 @@
 {
     "variants": {
-		"type=0": { "model": "at:leaves_candy_0" },
-		"type=1": { "model": "at:leaves_candy_4" },
-		"type=2": { "model": "at:leaves_candy_8" },
-		"type=3": { "model": "at:leaves_candy_12" }
+		"check_decay=false,decayable=false,type=0": { "model": "at:leaves_candy_0" },
+		"check_decay=true,decayable=false,type=0": { "model": "at:leaves_candy_0" },
+		"check_decay=true,decayable=true,type=0": { "model": "at:leaves_candy_0" },
+		"check_decay=false,decayable=true,type=0": { "model": "at:leaves_candy_0" },
+		
+		"check_decay=false,decayable=false,type=1": { "model": "at:leaves_candy_1" },
+		"check_decay=true,decayable=false,type=1": { "model": "at:leaves_candy_1" },
+		"check_decay=true,decayable=true,type=1": { "model": "at:leaves_candy_1" },
+		"check_decay=false,decayable=true,type=1": { "model": "at:leaves_candy_1" },
+		
+		"check_decay=false,decayable=false,type=2": { "model": "at:leaves_candy_2" },
+		"check_decay=true,decayable=false,type=2": { "model": "at:leaves_candy_2" },
+		"check_decay=true,decayable=true,type=2": { "model": "at:leaves_candy_2" },
+		"check_decay=false,decayable=true,type=2": { "model": "at:leaves_candy_2" },
+		
+		"check_decay=false,decayable=false,type=3": { "model": "at:leaves_candy_3" },
+		"check_decay=true,decayable=false,type=3": { "model": "at:leaves_candy_3" },
+		"check_decay=true,decayable=true,type=3": { "model": "at:leaves_candy_3" },
+		"check_decay=false,decayable=true,type=3": { "model": "at:leaves_candy_3" }
     }
 }
