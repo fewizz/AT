@@ -16,7 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.IRenderHandler;
 
 import static fewizz.at.client.Rend.*;
@@ -31,7 +30,7 @@ public class SkyRenderer extends IRenderHandler {
 
 	@Override
 	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		distance = (mc.gameSettings.renderDistanceChunks * 16) + 30;
+		distance = (mc.gameSettings.renderDistanceChunks * 16) + 15;
 		Tessellator tes = Tessellator.getInstance();
 		GlStateManager.disableFog();
 		VertexBuffer wr = tes.getBuffer();
@@ -50,7 +49,7 @@ public class SkyRenderer extends IRenderHandler {
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0, -40, 0);
-		GlStateManager.rotate(mc.theWorld.getCelestialAngle(partialTicks) * 360.0F, 1, 0, 0);
+		GlStateManager.rotate((mc.theWorld.getCelestialAngle(partialTicks) * 360.0F) * 2F, 1, 0, 0);
 		GlStateManager.rotate(45, 0, 1, 0);
 		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 

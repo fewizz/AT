@@ -2,7 +2,7 @@ package fewizz.at.util;
 
 import java.io.File;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
@@ -29,7 +29,7 @@ public class ATConfiguration {
 	
 	public static int getFreeBiomeID() {
 		for(int i = 0; i < 256; i++) {
-			if(BiomeGenBase.getBiome(i) == null) {
+			if(Biome.getBiome(i) == null) {
 				return i;
 			}
 		}

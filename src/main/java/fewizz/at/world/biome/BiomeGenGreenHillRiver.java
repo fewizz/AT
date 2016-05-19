@@ -12,10 +12,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 public class BiomeGenGreenHillRiver extends ATBiome {
 
 	public BiomeGenGreenHillRiver() {
-		super("ATGreenHillRiver", -0.45F, 0.2F);
-		
-		this.topBlock = Blocks.SAND.getDefaultState();
-		this.fillerBlock = Blocks.SAND.getDefaultState();
+		super("ATGreenHillRiver", -0.15F, 0.0F);
 	}
 	
 	@Override

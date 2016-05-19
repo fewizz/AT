@@ -14,8 +14,8 @@ import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
@@ -33,18 +33,19 @@ public class ATBiomeProvider extends BiomeProvider {
 		this.genBiomes = ATGenLayerMain.initializeAllBiomeGenerators(seed);
 	}
 
-	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] biomes, int x, int z, int width, int height) {
+	@Override
+	public Biome[] getBiomesForGeneration(Biome[] biomes, int x, int z, int width, int height) {
 		IntCache.resetIntCache();
 
 		if (biomes == null || biomes.length < width * height) {
-			biomes = new BiomeGenBase[width * height];
+			biomes = new Biome[width * height];
 		}
 
 		int[] aint = this.genBiomes.getInts(x, z, width, height);
 
 		try {
 			for (int i = 0; i < width * height; ++i) {
-				biomes[i] = BiomeGenBase.getBiomeFromBiomeList(aint[i], Biomes.DEFAULT);
+				biomes[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
 			}
 
 			return biomes;
@@ -60,15 +61,16 @@ public class ATBiomeProvider extends BiomeProvider {
 		}
 	}
 
-	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] listToReuse, int x, int z, int width, int length, boolean cacheFlag) {
+	@Override
+	public Biome[] getBiomeGenAt(Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag) {
 		IntCache.resetIntCache();
 
 		if (listToReuse == null || listToReuse.length < width * length) {
-			listToReuse = new BiomeGenBase[width * length];
+			listToReuse = new Biome[width * length];
 		}
 
 		if (cacheFlag && width == 16 && length == 16 && (x & 15) == 0 && (z & 15) == 0) {
-			BiomeGenBase[] abiomegenbase = this.biomeCache.getCachedBiomes(x, z);
+			Biome[] abiomegenbase = this.biomeCache.getCachedBiomes(x, z);
 			System.arraycopy(abiomegenbase, 0, listToReuse, 0, width * length);
 			return listToReuse;
 		}
@@ -76,14 +78,15 @@ public class ATBiomeProvider extends BiomeProvider {
 			int[] aint = this.genBiomes.getInts(x, z, width, length);
 
 			for (int i = 0; i < width * length; ++i) {
-				listToReuse[i] = BiomeGenBase.getBiomeFromBiomeList(aint[i], Biomes.DEFAULT);
+				listToReuse[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
 			}
 
 			return listToReuse;
 		}
 	}
 
-	public boolean areBiomesViable(int posX, int posZ, int radius, List<BiomeGenBase> list) {
+	@Override
+	public boolean areBiomesViable(int posX, int posZ, int radius, List<Biome> list) {
 		IntCache.resetIntCache();
 		int i = posX - radius >> 2;
 		int j = posZ - radius >> 2;
@@ -95,7 +98,7 @@ public class ATBiomeProvider extends BiomeProvider {
 
 		try {
 			for (int k1 = 0; k1 < i1 * j1; ++k1) {
-				BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[k1]);
+				Biome biomegenbase = Biome.getBiome(aint[k1]);
 
 				if (!list.contains(biomegenbase)) {
 					return false;
@@ -115,7 +118,8 @@ public class ATBiomeProvider extends BiomeProvider {
 		}
 	}
 
-	public BlockPos findBiomePosition(int x, int z, int range, List<BiomeGenBase> biomes, Random random) {
+	@Override
+	public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random) {
 		IntCache.resetIntCache();
 		int i = x - range >> 2;
 		int j = z - range >> 2;
@@ -130,7 +134,7 @@ public class ATBiomeProvider extends BiomeProvider {
 		for (int l1 = 0; l1 < i1 * j1; ++l1) {
 			int i2 = i + l1 % i1 << 2;
 			int j2 = j + l1 / i1 << 2;
-			BiomeGenBase biomegenbase = BiomeGenBase.getBiome(aint[l1]);
+			Biome biomegenbase = Biome.getBiome(aint[l1]);
 
 			if (biomes.contains(biomegenbase) && (blockpos == null || random.nextInt(k1 + 1) == 0)) {
 				blockpos = new BlockPos(i2, 0, j2);
@@ -141,7 +145,8 @@ public class ATBiomeProvider extends BiomeProvider {
 		return blockpos;
 	}
 
-	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
+	@Override
+	public GenLayer[] getModdedBiomeerators(WorldType worldType, long seed, GenLayer[] original) {
 		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
 		return event.getNewBiomeGens();

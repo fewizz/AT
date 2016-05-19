@@ -18,7 +18,7 @@ public class BiomeGenGreenHill extends ATBiome {
 	public static SimplexNoise noise = new SimplexNoise();
 
 	public BiomeGenGreenHill() {
-		super("ATGreenHill", 0.25f, 0.4f);
+		super("ATGreenHill", 0.25f, 0.6f);
 		
 		this.fillerBlock = Blocks.DIRT.getDefaultState();
 		this.topBlock = Blocks.GRASS.getDefaultState();
@@ -42,11 +42,15 @@ public class BiomeGenGreenHill extends ATBiome {
 	}
 	
 	@Override
+	public int getSkyColor() {
+		return 0x008227;
+	}
+	
+	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random rand) {
 		return new WorldGenCandyTree(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState().withProperty(Blocks.LEAVES.CHECK_DECAY, false));
 	}
 
-	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int zCoord, int xCoord, double noiseVal) {
 		int z = zCoord & 15;
 		int x = xCoord & 15;
@@ -54,7 +58,7 @@ public class BiomeGenGreenHill extends ATBiome {
 		/** Hilling **/
 		IBlockState[] states = new IBlockState[256];
 
-		int offset = ((int) ((((float) noise.noise((float)xCoord / 100f, (float)zCoord / 100f) + 1) / 2f) * 6)) * 3;
+		int offset = ((int) ((((float) noise.noise((float)xCoord / 64f, (float)zCoord / 64f) + 1) / 2f) * 6)) * 3;
 
 		for (int y = 0; y < 256; y++) {
 			states[y] = chunkPrimerIn.getBlockState(x, y, z);

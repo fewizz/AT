@@ -2,17 +2,17 @@ package fewizz.at.world.biome;
 
 import fewizz.at.util.ATConfiguration;
 import fewizz.at.util.IHasName;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
-public class ATBiome extends BiomeGenBase implements IHasName{
+public class ATBiome extends Biome implements IHasName{
 	
 	public int biomeID;
 	public String name;
 	
-	public ATBiome(String name, BiomeGenBase.BiomeProperties prop) {
+	public ATBiome(String name, Biome.BiomeProperties prop) {
 		super(prop);
 		biomeID = ATConfiguration.getBiomeID(name);
-		BiomeGenBase.registerBiome(biomeID, name, this);
+		Biome.registerBiome(biomeID, name, this);
 		this.name = name;
 	}
 	

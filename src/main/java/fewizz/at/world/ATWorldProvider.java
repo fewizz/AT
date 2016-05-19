@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
@@ -89,7 +89,7 @@ public class ATWorldProvider extends WorldProvider {
 		for (int x = -len; x <= len; x++) {
 			for (int z = -len; z <= len; z++) {
 
-				BiomeGenBase biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
+				Biome biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
 
 				if (biome instanceof ATBiome) {
 					int color = ((ATBiome) biome).getSkyColor();
@@ -128,7 +128,7 @@ public class ATWorldProvider extends WorldProvider {
 		for (int x = -len; x <= len; x++) {
 			for (int z = -len; z <= len; z++) {
 
-				BiomeGenBase biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
+				Biome biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
 
 				if (biome instanceof ATBiome) {
 					int color = ((ATBiome) biome).getCloudColor();

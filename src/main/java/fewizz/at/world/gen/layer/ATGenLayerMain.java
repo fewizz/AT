@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 import fewizz.at.world.biome.ATBiome;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
@@ -63,7 +63,7 @@ public abstract class ATGenLayerMain extends GenLayer {
 
 			for (int x = 0; x < imageSize; x++) {
 				for (int y = 0; y < imageSize; y++) {
-					BiomeGenBase biome = BiomeGenBase.getBiome(ints[x + (y * imageSize)]);
+					Biome biome = Biome.getBiome(ints[x + (y * imageSize)]);
 					int color = 0xFFFFFF;
 
 					if (biome instanceof ATBiome) {

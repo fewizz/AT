@@ -64,22 +64,24 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 		return state.getValue(TYPE);
 	}
 
+	
 	@Override
-	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
 		BlockPos posBot = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
 		BlockPos posTop = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-		IBlockState botState = worldIn.getBlockState(posBot);
-		IBlockState topState = worldIn.getBlockState(posTop);
+		IBlockState botState = world.getBlockState(posBot);
+		IBlockState topState = world.getBlockState(posTop);
 
-		if (botState.getBlock().getMaterial(botState) == Material.AIR) {
-			worldIn.destroyBlock(pos, true);
-		}
+		//if (botState.getBlock().getMaterial(botState) == Material.AIR) {
+		//	world.destroyBlock(pos, true);
+		//	world.
+		//}
 
-		if (topState.getBlock().getMaterial(topState) == Material.AIR) {
-			if (worldIn.getBlockState(pos).getBlock() == ATBlocks.sedge && ATBlocks.sedge.getMetaFromState(worldIn.getBlockState(pos)) != 2) {
-				worldIn.destroyBlock(pos, true);
-			}
-		}
+		//if (topState.getBlock().getMaterial(topState) == Material.AIR) {
+		//	if (world.getBlockState(pos).getBlock() == ATBlocks.sedge && ATBlocks.sedge.getMetaFromState(worldIn.getBlockState(pos)) != 2) {
+		//		world.destroyBlock(pos, true);
+		//	}
+		//}
 	}
 
 	@Override

@@ -21,10 +21,10 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 	public IBlockState log;
 	public IBlockState leaves;
 
-	public static int TREE_HEIGHT = 16;
-	public static int NORMAL_BRANCH_RADIUS = 4;
-	public static int BRANCH_RADIUS_VARIATION = 3;
-	public static int LEAVES_OFFSET = 5;
+	public static int TREE_HEIGHT = 20;
+	public static int NORMAL_BRANCH_RADIUS = 3;
+	public static int BRANCH_RADIUS_VARIATION = 2;
+	public static int LEAVES_OFFSET = 10;
 	public static float BRANCH_WIDTH_SCALE = 1.4F;
 	public static float BRANCH_HEIGHT_SCALE = 0.8F;
 
@@ -82,7 +82,7 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 	}
 
 	public void generateBranches() {
-		for (int i = LEAVES_OFFSET; i < TREE_HEIGHT; i++) {
+		for (int i = LEAVES_OFFSET; i < TREE_HEIGHT + 1; i++) {
 			generateBranch(i);
 		}
 	}
@@ -90,13 +90,9 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 	public void generateBranch(int offsetY) {
 		final float radius = NORMAL_BRANCH_RADIUS + (rnd.nextInt(BRANCH_RADIUS_VARIATION * 2 + 1)) - BRANCH_RADIUS_VARIATION;
 		final float angle = (float) Math.toRadians(rnd.nextInt(360));
-		final float scale = (float) rnd.nextDouble();
+		final float scale = (float) rnd.nextDouble() / 2f;
 		final int offsetX = (int) (MathHelper.sin(angle) * radius * scale);
 		final int offsetZ = (int) (MathHelper.cos(angle) * radius * scale);
-
-		if (radius * BRANCH_HEIGHT_SCALE > LEAVES_OFFSET) {
-			return;
-		}
 
 		for (float y = -radius * BRANCH_HEIGHT_SCALE; y <= radius * BRANCH_HEIGHT_SCALE; y++) {
 			for (float z = -radius * BRANCH_WIDTH_SCALE; z <= radius * BRANCH_WIDTH_SCALE; z++) {

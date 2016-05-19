@@ -1,7 +1,6 @@
 package fewizz.at.world.gen.layer;
 
 import fewizz.at.init.ATBiomes;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
