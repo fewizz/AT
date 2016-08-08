@@ -23,6 +23,8 @@ import static fewizz.at.client.Rend.*;
 public class SkyRenderer extends IRenderHandler {
 
 	ResourceLocation skybox = new ResourceLocation("at:textures/sky/skybox.png");
+	public static Vec3d prevColor = new Vec3d(0, 0, 0);
+	public static Vec3d color = new Vec3d(0, 0, 0);
 
 	float x = 1F / 4F;
 	float y = 1F / 3F;
@@ -35,10 +37,9 @@ public class SkyRenderer extends IRenderHandler {
 		GlStateManager.disableFog();
 		VertexBuffer wr = tes.getBuffer();
 		
-		Vec3d color = world.getSkyColor(mc.thePlayer, partialTicks);
-		int r = (int) (color.xCoord * 255);
-		int g = (int) (color.yCoord * 255);;
-		int b = (int) (color.zCoord * 255);;
+		int r = (int) ((prevColor.xCoord + ((color.xCoord - prevColor.xCoord) * partialTicks)) * 255);//(((color.xCoord + prevColor.xCoord) / 2f) * 255);
+		int g = (int) ((prevColor.yCoord + ((color.yCoord - prevColor.yCoord) * partialTicks)) * 255);
+		int b = (int) ((prevColor.zCoord + ((color.zCoord - prevColor.zCoord) * partialTicks)) * 255);
 		
 		GlStateManager.color(1, 1, 1);
 		GlStateManager.disableCull();

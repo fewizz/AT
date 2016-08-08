@@ -146,7 +146,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 		int x = chX * 16;
 		int z = chZ * 16;
 		BlockPos blockpos = new BlockPos(x, 0, z);
-		Biome biomegenbase = this.worldObj.getBiomeGenForCoords(blockpos.add(16, 0, 16));
+		Biome biomegenbase = this.worldObj.getBiome(blockpos.add(16, 0, 16));
 		biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(x, 0, z));
 	}
 
@@ -162,7 +162,7 @@ public class ATChunkProvider implements IChunkGenerator, IChunkProvider {
 
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		Biome biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 		return biomegenbase.getSpawnableList(creatureType);
 	}
 

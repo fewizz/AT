@@ -64,6 +64,10 @@ public class BlockSedge extends Block implements IPlantable, IHasName {
 		return state.getValue(TYPE);
 	}
 
+	@Override
+	public EnumOffsetType getOffsetType() {
+		return EnumOffsetType.XZ;
+	}
 	
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {

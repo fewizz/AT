@@ -62,7 +62,7 @@ public class ATBiomeProvider extends BiomeProvider {
 	}
 
 	@Override
-	public Biome[] getBiomeGenAt(Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag) {
+	public Biome[] getBiomes(Biome[] listToReuse, int x, int z, int width, int length, boolean cacheFlag) {
 		IntCache.resetIntCache();
 
 		if (listToReuse == null || listToReuse.length < width * length) {
@@ -146,7 +146,7 @@ public class ATBiomeProvider extends BiomeProvider {
 	}
 
 	@Override
-	public GenLayer[] getModdedBiomeerators(WorldType worldType, long seed, GenLayer[] original) {
+	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
 		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
 		return event.getNewBiomeGens();

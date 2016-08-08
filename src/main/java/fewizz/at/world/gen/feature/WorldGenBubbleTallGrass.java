@@ -26,11 +26,13 @@ public class WorldGenBubbleTallGrass extends WorldGenerator {
 		}
 		while (position.getY() > 0);
 
-		for (int i = 0; i < 128; ++i) {
+		int h = worldIn.getChunkFromBlockCoords(position).getHeight(position) + 2;
+		
+		for (int i = 0; i < h; ++i) {
 			BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
 			if (worldIn.isAirBlock(blockpos) && ((BlockBubbleTallGrass)ATBlocks.bubbleTallGrass).canBlockStay(worldIn, blockpos, ATBlocks.bubbleTallGrass.getDefaultState())) {
-				worldIn.setBlockState(blockpos, ATBlocks.bubbleTallGrass.getDefaultState(), 2);
+				worldIn.setBlockState(blockpos, ATBlocks.bubbleTallGrass.getStateFromMeta(worldIn.rand.nextInt(8)), 2);
 			}
 		}
 

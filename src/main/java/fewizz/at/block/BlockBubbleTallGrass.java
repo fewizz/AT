@@ -9,6 +9,9 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -24,6 +27,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShearable, IHasName {
+	
+	public static final PropertyInteger ROT = PropertyInteger.create("rot", 0, 7);
 
 	@Override
 	public String getName() {
@@ -37,7 +42,27 @@ public class BlockBubbleTallGrass extends BlockBush implements IGrowable, IShear
 		GameRegistry.register(this, new ResourceLocation("at", getName()));
 		GameRegistry.register(new ItemBlock(this), new ResourceLocation("at", getName()));
 	}
+	
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { ROT });
+	}
 
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(ROT);
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(ROT, meta);
+	}
+
+	@Override
+	public EnumOffsetType getOffsetType() {
+		return EnumOffsetType.XZ;
+	}
+	
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		return Blocks.TALLGRASS.getDrops(world, pos, state, fortune);

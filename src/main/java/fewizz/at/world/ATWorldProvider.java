@@ -80,7 +80,7 @@ public class ATWorldProvider extends WorldProvider {
 	@Override
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
 		BlockPos playerPos = new BlockPos(cameraEntity);
-		int len = 6;
+		int len = 16;
 		int count = 0;
 		float r = 0;
 		float g = 0;
@@ -89,7 +89,7 @@ public class ATWorldProvider extends WorldProvider {
 		for (int x = -len; x <= len; x++) {
 			for (int z = -len; z <= len; z++) {
 
-				Biome biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
+				Biome biome = Minecraft.getMinecraft().theWorld.getBiome(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
 
 				if (biome instanceof ATBiome) {
 					int color = ((ATBiome) biome).getSkyColor();
@@ -119,7 +119,7 @@ public class ATWorldProvider extends WorldProvider {
 	@Override
 	public Vec3d getCloudColor(float partialTicks) {
 		BlockPos playerPos = new BlockPos(Minecraft.getMinecraft().thePlayer);
-		int len = 6;
+		int len = 16;
 		int count = 0;
 		float r = 0;
 		float g = 0;
@@ -128,7 +128,7 @@ public class ATWorldProvider extends WorldProvider {
 		for (int x = -len; x <= len; x++) {
 			for (int z = -len; z <= len; z++) {
 
-				Biome biome = Minecraft.getMinecraft().theWorld.getBiomeGenForCoords(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
+				Biome biome = Minecraft.getMinecraft().theWorld.getBiome(new BlockPos(playerPos.getX() + x, 0, playerPos.getZ() + z));
 
 				if (biome instanceof ATBiome) {
 					int color = ((ATBiome) biome).getCloudColor();
