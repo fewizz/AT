@@ -13,7 +13,7 @@ public class ATCreativeTab extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return ATItems.teleporter;
+		return ATItems.TELEPORTER;
 	}
 
 }

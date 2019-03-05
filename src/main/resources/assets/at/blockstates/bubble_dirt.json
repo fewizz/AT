@@ -1,0 +1,10 @@
+{
+    "variants": {
+		"": [
+            { "model": "at:block/bubble_dirt" },
+            { "model": "at:block/bubble_dirt_mirrored" },
+            { "model": "at:block/bubble_dirt", "y": 180 },
+            { "model": "at:block/bubble_dirt_mirrored", "y": 180 }
+        ]
+    }
+}

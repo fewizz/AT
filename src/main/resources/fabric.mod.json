@@ -1,0 +1,17 @@
+{
+  "id": "at",
+  "name": "AT",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "version": "${version}",
+  "side": "universal",
+  "initializers": [
+    "fewizz.at.AT"
+  ],
+  "requires": {
+    "fabric": "*"
+  },
+  "mixins": {
+    "client": "at.client.json",
+    "common": "at.common.json"
+  }
+}

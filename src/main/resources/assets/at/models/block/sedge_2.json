@@ -1,6 +1,6 @@
 {
     "parent": "block/tinted_cross",
     "textures": {
-        "cross": "at:blocks/sedge_2"
+        "cross": "at:block/sedge_2"
     }
 }

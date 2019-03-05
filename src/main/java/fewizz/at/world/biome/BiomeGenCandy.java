@@ -15,7 +15,7 @@ public class BiomeGenCandy extends ATBiome {
 		super("ATCandy", 0.35F, 0.45F);
 		
 		this.topBlock = ATBlocks.candyGrass.getDefaultState();
-		this.fillerBlock = ATBlocks.bubbleDirt.getDefaultState();
+		this.fillerBlock = ATBlocks.BUBBLE_DIRT.getDefaultState();
 		this.theBiomeDecorator.grassPerChunk = 0;
 		this.theBiomeDecorator.treesPerChunk = 1;
 	}
@@ -42,7 +42,7 @@ public class BiomeGenCandy extends ATBiome {
 	
 	@Override
 	public WorldGenAbstractTree genBigTreeChance(Random rand) {
-		WorldGenCandyTree wg = new WorldGenCandyTree(ATBlocks.candyLog.getDefaultState(), ATBlocks.bubbleLeaves.getDefaultState().withProperty(BlockBubbleLeaves.DECAYABLE, true).withProperty(BlockBubbleLeaves.CHECK_DECAY,  false));
+		WorldGenCandyTree wg = new WorldGenCandyTree(ATBlocks.candyLog.getDefaultState(), ATBlocks.BUBBLE_LEAVES.getDefaultState().withProperty(BlockBubbleLeaves.DECAYABLE, true).withProperty(BlockBubbleLeaves.CHECK_DECAY,  false));
 		wg.TREE_HEIGHT = 12;
 		wg.NORMAL_BRANCH_RADIUS = 3;
 		wg.BRANCH_RADIUS_VARIATION = 2;

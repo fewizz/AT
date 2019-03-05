@@ -1,5 +1,5 @@
 {
-    "parent": "at:block/grass_bubble",
+    "parent": "at:block/bubble_grass",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

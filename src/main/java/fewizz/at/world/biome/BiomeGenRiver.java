@@ -43,9 +43,9 @@ public class BiomeGenRiver extends ATBiome {
 		}
 
 		if (y != -1) {
-			chunkPrimerIn.setBlockState(x, y + 1, z, ATBlocks.sedge.getStateFromMeta(0));
-			chunkPrimerIn.setBlockState(x, y + 2, z, ATBlocks.sedge.getStateFromMeta(1));
-			chunkPrimerIn.setBlockState(x, y + 3, z, ATBlocks.sedge.getStateFromMeta(2));
+			chunkPrimerIn.setBlockState(x, y + 1, z, ATBlocks.SEDGE.getStateFromMeta(0));
+			chunkPrimerIn.setBlockState(x, y + 2, z, ATBlocks.SEDGE.getStateFromMeta(1));
+			chunkPrimerIn.setBlockState(x, y + 3, z, ATBlocks.SEDGE.getStateFromMeta(2));
 		}
 
 	}

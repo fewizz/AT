@@ -1,35 +1,45 @@
 package fewizz.at.init;
 
-import fewizz.at.block.BlockBubbleDirt;
-import fewizz.at.block.BlockBubbleGrass;
-import fewizz.at.block.BlockBubbleLeaves;
-import fewizz.at.block.BlockBubbleTallGrass;
-import fewizz.at.block.BlockCandyGrass;
-import fewizz.at.block.BlockCandyLeaves;
 import fewizz.at.block.BlockSedge;
-import fewizz.at.block.BlockCandyLog;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.Material;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ATBlocks {
 
-	public static Block bubbleGrass;
-	public static Block bubbleDirt;
-	public static Block bubbleTallGrass;
-	public static Block bubbleLeaves;
+	public static final Block BUBBLE_GRASS = new Block(FabricBlockSettings.copy(Blocks.DIRT).build());
+	public static final Block BUBBLE_DIRT = new Block(FabricBlockSettings.copy(Blocks.DIRT).build());
+	public static final Block BUBBLE_LEAVES = new LeavesBlock(FabricBlockSettings.copy(Blocks.BIRCH_LEAVES).build());
 	public static Block candyGrass;
 	public static Block candyLeaves;
 	public static Block candyLog;
-	public static Block sedge;
+	public static final Block SEDGE = new BlockSedge(FabricBlockSettings.of(Material.PLANT).build());
 
 	public static void init() {
-		bubbleGrass = new BlockBubbleGrass();
-		bubbleDirt = new BlockBubbleDirt();
-		bubbleTallGrass = new BlockBubbleTallGrass();
-		bubbleLeaves = new BlockBubbleLeaves();
-		candyGrass = new BlockCandyGrass();
-		candyLeaves = new BlockCandyLeaves();
-		candyLog = new BlockCandyLog();
-		sedge = new BlockSedge();
+		Registry.register(
+			Registry.BLOCK,
+			new Identifier("at", "bubble_grass"),
+			BUBBLE_GRASS
+		);
+		Registry.register(
+			Registry.BLOCK,
+			new Identifier("at", "bubble_dirt"),
+			BUBBLE_DIRT
+		);
+		Registry.register(
+			Registry.BLOCK,
+			new Identifier("at", "bubble_leaves"),
+			BUBBLE_LEAVES
+		);
+		Registry.register(
+			Registry.BLOCK,
+			new Identifier("at", "sedge"),
+			SEDGE
+		);
 	}
 
 }

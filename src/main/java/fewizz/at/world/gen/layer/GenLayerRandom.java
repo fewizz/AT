@@ -1,9 +1,8 @@
 package fewizz.at.world.gen.layer;
 
 import fewizz.at.init.ATBiomes;
-import net.minecraft.world.gen.layer.GenLayer;
 
-public class GenLayerRandom extends GenLayer {
+public class GenLayerRandom extends Layer {
 
 	public GenLayerRandom(long seed) {
 		super(seed);

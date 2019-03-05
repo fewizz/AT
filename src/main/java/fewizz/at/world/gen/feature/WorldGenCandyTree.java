@@ -68,7 +68,7 @@ public class WorldGenCandyTree extends WorldGenAbstractTree {
 		IBlockState state = this.world.getBlockState(down);
 		Block block = state.getBlock();
 
-		if (block == ATBlocks.bubbleTallGrass || block == ATBlocks.bubbleGrass || block == Blocks.DIRT || block == Blocks.GRASS || block == ATBlocks.candyGrass) {
+		if (block == ATBlocks.BUBBLE_TALL_GRASS || block == ATBlocks.BUBBLE_GRASS || block == Blocks.DIRT || block == Blocks.GRASS || block == ATBlocks.candyGrass) {
 			return true;
 		}
 

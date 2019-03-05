@@ -1,62 +1,20 @@
 package fewizz.at;
 
-import java.io.File;
-
-import fewizz.at.client.CloudRenderer;
 import fewizz.at.init.ATBiomes;
 import fewizz.at.init.ATBlocks;
 import fewizz.at.init.ATItems;
-import fewizz.at.item.ItemTeleporter;
-import fewizz.at.proxy.Proxy;
-import fewizz.at.util.ATConfiguration;
-import fewizz.at.util.ATCreativeTab;
-import fewizz.at.util.ATEventHandler;
-import fewizz.at.world.ATWorldProvider;
-import fewizz.at.world.biome.BiomeGenBubble;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.world.DimensionType;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import fewizz.at.world.dimension.ATDimensionType;
+import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
-@Mod(modid = AT.MODID, version = AT.VERSION)
-public class AT {
-	public static final String MODID = "at";
-	public static final String VERSION = "0.1.3";
+public class AT implements ModInitializer {
 	
-	@SidedProxy(
-			clientSide = "fewizz.at.proxy.ClientProxy",
-			serverSide = "fewizz.at.proxy.Proxy")
-	public static Proxy proxy;
-	
-	public static final CreativeTabs tab = new ATCreativeTab();
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		ATConfiguration.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + "/AT.cfg"));
-	}
-	
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new ATEventHandler());
-		DimensionType.register("AT", "1", ATConfiguration.dimID, ATWorldProvider.class, true);
-		DimensionManager.registerDimension(ATConfiguration.dimID, DimensionType.getById(ATConfiguration.dimID));
+	@Override
+	public void onInitialize() {
 		ATBlocks.init();
 		ATItems.init();
 		ATBiomes.init();
-	}
-	
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.registerItemVariants();
-		proxy.registerRenders();
+		Registry.register(Registry.DIMENSION, new Identifier("at:at"), ATDimensionType.INSTANCE);
 	}
 }

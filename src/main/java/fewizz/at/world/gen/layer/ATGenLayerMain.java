@@ -9,35 +9,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import fewizz.at.world.biome.ATBiome;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkProviderSettings;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerAddIsland;
-import net.minecraft.world.gen.layer.GenLayerAddSnow;
-import net.minecraft.world.gen.layer.GenLayerBiomeEdge;
-import net.minecraft.world.gen.layer.GenLayerDeepOcean;
-import net.minecraft.world.gen.layer.GenLayerEdge;
-import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
-import net.minecraft.world.gen.layer.GenLayerIsland;
-import net.minecraft.world.gen.layer.GenLayerRareBiome;
-import net.minecraft.world.gen.layer.GenLayerRemoveTooMuchOcean;
-import net.minecraft.world.gen.layer.GenLayerRiverInit;
-import net.minecraft.world.gen.layer.GenLayerShore;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
+import net.minecraft.world.biome.layer.BiomeLayerSampler;
+import net.minecraft.world.biome.layer.BiomeLayers;
 
-public abstract class ATGenLayerMain extends GenLayer {
+public abstract class ATGenLayerMain {
 
-	public static final boolean printBiomes = false;
-	public static final int imageSize = 1024;
+	public static final boolean PRINT_BIOMES = false;
+	public static final int IMAGE_SIZE = 1024;
+	final long seed;
 
 	public ATGenLayerMain(long seed) {
-		super(seed);
+		this.seed = seed;
 	}
 
-	public static GenLayer initializeAllBiomeGenerators(long seed) {
+	public static BiomeLayerSampler initializeAllBiomeGenerators(long seed) {
 		GenLayer random = new GenLayerRandom(seed);
 		GenLayer zoom1 = GenLayerZoom.magnify(seed + 1, random, 1);
 		GenLayerSmooth smooth1 = new GenLayerSmooth(seed + 1, zoom1);
@@ -56,14 +42,14 @@ public abstract class ATGenLayerMain extends GenLayer {
 		ATGenLayerRiverMix mix = new ATGenLayerRiverMix(seed, smooth3, riverSmmoth1);
 		mix.initWorldGenSeed(seed);
 
-		if (printBiomes) {
-			BufferedImage image = new BufferedImage(imageSize, imageSize, BufferedImage.TYPE_4BYTE_ABGR);
+		if (PRINT_BIOMES) {
+			BufferedImage image = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_4BYTE_ABGR);
 			Graphics g = image.getGraphics();
-			int[] ints = mix.getInts(0, 0, imageSize, imageSize);
+			int[] ints = mix.getInts(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 
-			for (int x = 0; x < imageSize; x++) {
-				for (int y = 0; y < imageSize; y++) {
-					Biome biome = Biome.getBiome(ints[x + (y * imageSize)]);
+			for (int x = 0; x < IMAGE_SIZE; x++) {
+				for (int y = 0; y < IMAGE_SIZE; y++) {
+					Biome biome = Biome.getBiome(ints[x + (y * IMAGE_SIZE)]);
 					int color = 0xFFFFFF;
 
 					if (biome instanceof ATBiome) {

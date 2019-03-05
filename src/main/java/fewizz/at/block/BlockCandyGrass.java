@@ -44,7 +44,7 @@ public class BlockCandyGrass extends Block implements IHasName {
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		list.add(new ItemStack(ATBlocks.bubbleDirt));
+		list.add(new ItemStack(ATBlocks.BUBBLE_DIRT));
 		return list;
 	}
 }
