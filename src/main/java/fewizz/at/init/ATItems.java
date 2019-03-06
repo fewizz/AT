@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 public class ATItems {
 	
 	public static final Item TELEPORTER = new ItemTeleporter(new Item.Settings().itemGroup(ItemGroup.MISC));
-	public static final BlockItem BUBBLE_GRASS = new BlockItem(ATBlocks.BUBBLE_GRASS, new Item.Settings().itemGroup(ItemGroup.BUILDING_BLOCKS));
+	public static final BlockItem BUBBLE_GRASS = new BlockItem(ATBlocks.BUBBLE_GRASS_BLOCK, new Item.Settings().itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final BlockItem BUBBLE_DIRT = new BlockItem(ATBlocks.BUBBLE_DIRT, new Item.Settings().itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final BlockItem BUBBLE_LEAVES = new BlockItem(ATBlocks.BUBBLE_LEAVES, new Item.Settings().itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final BlockItem SEDGE = new BlockItem(ATBlocks.SEDGE, new Item.Settings().itemGroup(ItemGroup.BUILDING_BLOCKS));;
@@ -19,7 +19,7 @@ public class ATItems {
 		Registry.register(Registry.ITEM, new Identifier("at", "teleporter"), TELEPORTER);
 		
 		BUBBLE_GRASS.registerBlockItemMap(Item.BLOCK_ITEM_MAP, BUBBLE_GRASS);
-		Registry.register(Registry.ITEM, new Identifier("at", "bubble_grass"), BUBBLE_GRASS);
+		Registry.register(Registry.ITEM, new Identifier("at", "bubble_grass_block"), BUBBLE_GRASS);
 		
 		BUBBLE_DIRT.registerBlockItemMap(Item.BLOCK_ITEM_MAP, BUBBLE_DIRT);
 		Registry.register(Registry.ITEM, new Identifier("at", "bubble_dirt"), BUBBLE_DIRT);

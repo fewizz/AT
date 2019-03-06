@@ -1,8 +1,6 @@
 {
-    "parent": "block/cube_bottom_top",
+    "parent": "block/tinted_cross",
     "textures": {
-        "bottom": "at:block/bubble_dirt",
-        "top": "at:block/bubble_grass_top",
-        "side": "at:block/bubble_grass_side"
+        "cross": "at:block/bubble_grass"
     }
 }

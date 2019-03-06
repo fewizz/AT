@@ -1,5 +1,5 @@
 {
     "variants": {
-		"": { "model": "at:block/bubble_grass" }
+        "": { "model": "at:block/bubble_grass", "y": 0 }
     }
 }

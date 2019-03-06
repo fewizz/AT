@@ -46,7 +46,7 @@ public class ATChunkGenerator extends SurfaceChunkGenerator<ATChunkGeneratorConf
                     float13 = 1.0f + float13 * 2.0f;
                     float14 = 1.0f + float14 * 4.0f;
                 }
-                float float15 = 1;//OverworldChunkGenerator.BIOME_WEIGHT_TABLE[var9 + 2 + (var10 + 2) * 5] / (float13 + 2.0f);
+                float float15 = 0.5F;//OverworldChunkGenerator.BIOME_WEIGHT_TABLE[var9 + 2 + (var10 + 2) * 5] / (float13 + 2.0f);
                 if (biome12.getDepth() > float9) {
                     float15 /= 2.0f;
                 }
